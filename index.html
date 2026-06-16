@@ -520,7 +520,7 @@
                 <textarea id="usage-objective" rows="3" placeholder="e.g. Building application interfaces, listening to premium mix tracks, etc." class="w-full bg-slate-50 border border-slate-200 rounded-xl p-4 text-slate-900 font-medium text-sm focus:outline-none focus:border-blue-600 resize-none"></textarea>
             </div>
             
-            <button onclick="finalizeSign-InDeployment()" class="w-full mt-6 bg-blue-600 hover:bg-blue-700 text-white font-bold py-3.5 rounded-xl shadow-lg transition-all cursor-pointer uppercase tracking-wider text-sm">
+            <button onclick="finalizeSignInDeployment()" class="w-full mt-6 bg-blue-600 hover:bg-blue-700 text-white font-bold py-3.5 rounded-xl shadow-lg transition-all cursor-pointer uppercase tracking-wider text-sm">
                 Complete Cloud Compilation
             </button>
         </div>
@@ -691,7 +691,7 @@
         }
 
         // Final Element Extraction, Replacement and Core Deployment Closure
-        function finalizeSign-InDeployment() {
+        function finalizeSignInDeployment() {
             const authContainer = document.getElementById('auth-zone');
             const iconSymbol = chosenAvatarIdentity.split(' ')[0];
             const cleanNameLabel = chosenAvatarIdentity.split(' ').slice(1).join(' ');
