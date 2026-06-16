@@ -1,0 +1,605 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eleven Pro Raps Lab - By Nafay</title>
+    <!-- Tailwind CSS v4 -->
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <style>
+        /* Interactive 3D Tilt & Light Glow Effects */
+        .hover-glow-card {
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .hover-glow-card:hover {
+            transform: rotate(-3deg) translateY(-4px);
+            box-shadow: 0 20px 40px rgba(37, 99, 235, 0.30); /* 30% Blue Glow */
+            border-color: rgba(37, 99, 235, 0.5);
+        }
+        
+        .hover-glow-warning {
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .hover-glow-warning:hover {
+            transform: rotate(-3deg) translateY(-4px);
+            box-shadow: 0 20px 40px rgba(220, 38, 38, 0.30); /* 30% Red Glow */
+            border-color: rgba(220, 38, 38, 0.5);
+        }
+
+        /* 100x Continuous Fast Moving Logo Animation */
+        @keyframes fastLogoMove {
+            0% { transform: translateX(0px) rotate(0deg); }
+            25% { transform: translateX(15px) rotate(3deg); }
+            50% { transform: translateX(-15px) rotate(-3deg); }
+            75% { transform: translateX(10px) rotate(2deg); }
+            100% { transform: translateX(0px) rotate(0deg); }
+        }
+        .moving-logo {
+            animation: fastLogoMove 0.8s linear infinite;
+        }
+    </style>
+</head>
+<body id="app-body" class="bg-white text-slate-900 font-sans antialiased transition-colors duration-300 selection:bg-blue-100">
+
+    <!-- Top Decorative Status bar -->
+    <div class="h-2 bg-gradient-to-r from-blue-600 via-indigo-600 to-red-600"></div>
+
+    <!-- MAIN NAVBAR CONTAINER -->
+    <header class="border-b border-slate-200 bg-white/80 backdrop-blur-md sticky top-0 z-40 transition-colors duration-300 dark:bg-slate-900/80 dark:border-slate-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+            
+            <!-- Logo & Brand Details -->
+            <div class="flex items-center gap-3">
+                <div class="moving-logo bg-blue-600 text-white font-black text-xl px-4 py-2 rounded-xl shadow-lg shadow-blue-500/20 tracking-wider">
+                    E11R
+                </div>
+                <div>
+                    <h1 class="text-xl font-black uppercase tracking-tight text-slate-900 dark:text-white">Eleven Pro Raps Lab</h1>
+                    <p class="text-xs font-semibold text-blue-600 tracking-widest uppercase">By Nafay Develops Labs</p>
+                </div>
+            </div>
+
+            <!-- Dynamic Authentication Zone & Settings Menu -->
+            <div class="flex items-center gap-4">
+                <!-- Working State Control Container -->
+                <div id="auth-zone">
+                    <button onclick="openSignInModal()" class="bg-blue-600 hover:bg-blue-700 text-white text-sm font-bold px-6 py-2.5 rounded-xl shadow-sm transition-all duration-200 transform active:scale-95 cursor-pointer">
+                        Sign In
+                    </button>
+                </div>
+
+                <!-- Settings Tree Dots Button -->
+                <div class="relative">
+                    <button onclick="toggleSettingsMenu()" class="p-2 text-slate-500 hover:text-slate-800 dark:text-slate-400 dark:hover:text-white rounded-xl hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors duration-200 cursor-pointer" aria-label="Settings Menu">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M12 5v.01M12 12v.01M12 19v.01M12 6a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2z"></path>
+                        </svg>
+                    </button>
+
+                    <!-- Dropdown List Structure -->
+                    <div id="settings-menu" class="hidden absolute right-0 mt-3 w-56 rounded-2xl bg-white border border-slate-200 shadow-xl p-2 z-50 dark:bg-slate-800 dark:border-slate-700">
+                        <button onclick="toggleTheme()" class="w-full flex items-center gap-3 px-4 py-2.5 text-sm font-medium text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-700 rounded-xl transition-colors cursor-pointer">
+                            <span>🌓 Toggle Dark/Light</span>
+                        </button>
+                        <button onclick="handleMenuAction('Feedback submitted successfully!')" class="w-full flex items-center gap-3 px-4 py-2.5 text-sm font-medium text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-700 rounded-xl transition-colors cursor-pointer">
+                            <span>💬 Send Feedback</span>
+                        </button>
+                        <button onclick="handleMenuAction('Support documentation loaded.')" class="w-full flex items-center gap-3 px-4 py-2.5 text-sm font-medium text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-700 rounded-xl transition-colors cursor-pointer">
+                            <span>❓ Get Help</span>
+                        </button>
+                        <button onclick="handleMenuAction('Invite link generated!')" class="w-full flex items-center gap-3 px-4 py-2.5 text-sm font-medium text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-700 rounded-xl transition-colors cursor-pointer">
+                            <span>✉️ Invite Friends</span>
+                        </button>
+                        <button onclick="copyWebsiteLink()" class="w-full flex items-center gap-3 px-4 py-2.5 text-sm font-medium text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-700 rounded-xl transition-colors cursor-pointer">
+                            <span>🔗 Copy Web Link</span>
+                        </button>
+                        <hr class="border-slate-100 dark:border-slate-700 my-1">
+                        <button onclick="triggerLogout()" class="w-full flex items-center gap-3 px-4 py-2.5 text-sm font-bold text-red-600 hover:bg-red-50 dark:hover:bg-red-950/30 rounded-xl transition-colors cursor-pointer">
+                            <span>🚪 Log Out</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </header>
+
+    <!-- HERO INTRODUCTION HERO -->
+    <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-12 text-center">
+        <h2 class="text-5xl md:text-7xl font-black uppercase tracking-tight text-slate-900 dark:text-white">
+            V2 OF RAPS
+        </h2>
+        <p class="mt-4 text-xl md:text-2xl font-bold text-slate-500 max-w-2xl mx-auto dark:text-slate-400">
+            The Eleven Ultimate Website By Your Own <span class="text-blue-600">Nafay</span>
+        </p>
+    </section>
+
+    <!-- CONTENT MODULE LAYOUT -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 space-y-16">
+
+        <!-- 1. BIG IMPORTANT SUNO AI LINK BOX -->
+        <section class="hover-glow-card bg-slate-50 border border-slate-200 rounded-3xl p-8 transition-colors duration-300 dark:bg-slate-900 dark:border-slate-800">
+            <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
+                <div>
+                    <div class="inline-block bg-blue-100 text-blue-700 text-xs font-black px-3 py-1 rounded-full uppercase tracking-wider mb-3 dark:bg-blue-950 dark:text-blue-400">
+                        Primary Audio Station
+                    </div>
+                    <h3 class="text-3xl font-black tracking-tight text-slate-900 dark:text-white">ELEVEN PRO RAPS SUNO AI DASHBOARD</h3>
+                    <p class="text-slate-600 mt-1 dark:text-slate-400">Access exclusive AI generations, beats, and experimental audio pipelines directly inside the creator profile portal.</p>
+                </div>
+                <a href="https://suno.com/@maliknafay_pkp3" target="_blank" class="w-full md:w-auto text-center bg-slate-900 hover:bg-black text-white dark:bg-blue-600 dark:hover:bg-blue-700 font-bold px-8 py-4 rounded-2xl shadow-lg transition-all duration-200 cursor-pointer whitespace-nowrap">
+                    Launch Suno AI Hub →
+                </a>
+            </div>
+        </section>
+
+        <!-- 2. MASTER PIECES (3 BOXES WITH CUSTOM LINKS) -->
+        <section class="space-y-6">
+            <div class="border-l-4 border-blue-600 pl-4">
+                <h3 class="text-3xl font-black uppercase text-slate-900 dark:text-white">Studio Masterpieces</h3>
+                <p class="text-slate-500 text-sm dark:text-slate-400">Top prioritized record releases with advanced performance matrices.</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <!-- Card 1 -->
+                <div class="hover-glow-card bg-slate-50 border border-slate-200 rounded-2xl p-6 flex flex-col justify-between dark:bg-slate-900 dark:border-slate-800">
+                    <div>
+                        <span class="text-xs font-bold text-blue-600 uppercase">Masterpiece 01</span>
+                        <h4 class="text-2xl font-black mt-1 text-slate-900 dark:text-white">ITX YOUR BOY</h4>
+                        <p class="text-slate-500 text-sm mt-2 dark:text-slate-400">Official introductory track featuring deep base production and rhythmic layout structures.</p>
+                    </div>
+                    <a href="https://www.tiktok.com/@maliknafayoffical/video/7651525966623296788?is_from_webapp=1&sender_device=pc&web_id=7651661933339100679" target="_blank" class="mt-6 inline-block text-center bg-white border border-slate-200 text-slate-900 hover:bg-slate-100 font-bold py-2.5 rounded-xl text-sm transition-colors dark:bg-slate-800 dark:border-slate-700 dark:text-white dark:hover:bg-slate-700">
+                        Play Release Track
+                    </a>
+                </div>
+
+                <!-- Card 2 -->
+                <div class="hover-glow-card bg-slate-50 border border-slate-200 rounded-2xl p-6 flex flex-col justify-between dark:bg-slate-900 dark:border-slate-800">
+                    <div>
+                        <span class="text-xs font-bold text-blue-600 uppercase">Masterpiece 02</span>
+                        <h4 class="text-2xl font-black mt-1 text-slate-900 dark:text-white">MAFIA GIRL</h4>
+                        <p class="text-slate-500 text-sm mt-2 dark:text-slate-400">Narrative studio record structured with fast syncopated flows and advanced lyric architecture.</p>
+                    </div>
+                    <a href="https://www.tiktok.com/@maliknafayoffical/video/7651523168611437840?is_from_webapp=1&sender_device=pc&web_id=7651661933339100679" target="_blank" class="mt-6 inline-block text-center bg-white border border-slate-200 text-slate-900 hover:bg-slate-100 font-bold py-2.5 rounded-xl text-sm transition-colors dark:bg-slate-800 dark:border-slate-700 dark:text-white dark:hover:bg-slate-700">
+                        Play Release Track
+                    </a>
+                </div>
+
+                <!-- Card 3 -->
+                <div class="hover-glow-card bg-slate-50 border border-slate-200 rounded-2xl p-6 flex flex-col justify-between dark:bg-slate-900 dark:border-slate-800">
+                    <div>
+                        <span class="text-xs font-bold text-blue-600 uppercase">Masterpiece 03</span>
+                        <h4 class="text-2xl font-black mt-1 text-slate-900 dark:text-white">AURA</h4>
+                        <p class="text-slate-500 text-sm mt-2 dark:text-slate-400">Premium heavy ambient engineering exploring street identity and classic hip hop motifs.</p>
+                    </div>
+                    <a href="https://www.tiktok.com/@maliknafayoffical/video/7641305618518641940?is_from_webapp=1&sender_device=pc&web_id=7651661933339100679" target="_blank" class="mt-6 inline-block text-center bg-white border border-slate-200 text-slate-900 hover:bg-slate-100 font-bold py-2.5 rounded-xl text-sm transition-colors dark:bg-slate-800 dark:border-slate-700 dark:text-white dark:hover:bg-slate-700">
+                        Play Release Track
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- 3. ADDITIONAL STUDIO ALBUM LISTINGS -->
+        <section class="space-y-6">
+            <div class="border-l-4 border-slate-900 pl-4 dark:border-white">
+                <h3 class="text-3xl font-black uppercase text-slate-900 dark:text-white">Discography & Sound Tracks</h3>
+                <p class="text-slate-500 text-sm dark:text-slate-400">Unified tracking compilation accessible on global streaming servers.</p>
+            </div>
+
+            <div class="bg-slate-50 border border-slate-200 rounded-2xl overflow-hidden dark:bg-slate-900 dark:border-slate-800">
+                <div class="divide-y divide-slate-200 dark:divide-slate-800">
+                    <!-- Track 1 -->
+                    <div class="p-4 sm:p-6 flex flex-wrap items-center justify-between gap-4 hover:bg-slate-100/50 dark:hover:bg-slate-800/40 transition-colors">
+                        <div class="flex items-center gap-4">
+                            <span class="font-mono text-slate-400 font-bold">01</span>
+                            <span class="font-black tracking-wide text-slate-900 dark:text-white">AURAAAAA</span>
+                        </div>
+                        <a href="https://www.tiktok.com/@maliknafayoffical" target="_blank" class="text-xs bg-blue-50 text-blue-600 hover:bg-blue-100 font-bold px-4 py-2 rounded-lg transition-colors dark:bg-blue-950/50 dark:text-blue-400">Stream Track</a>
+                    </div>
+                    <!-- Track 2 -->
+                    <div class="p-4 sm:p-6 flex flex-wrap items-center justify-between gap-4 hover:bg-slate-100/50 dark:hover:bg-slate-800/40 transition-colors">
+                        <div class="flex items-center gap-4">
+                            <span class="font-mono text-slate-400 font-bold">02</span>
+                            <span class="font-black tracking-wide text-slate-900 dark:text-white">BOY EGO</span>
+                        </div>
+                        <a href="https://www.tiktok.com/@maliknafayoffical" target="_blank" class="text-xs bg-blue-50 text-blue-600 hover:bg-blue-100 font-bold px-4 py-2 rounded-lg transition-colors dark:bg-blue-950/50 dark:text-blue-400">Stream Track</a>
+                    </div>
+                    <!-- Track 3 -->
+                    <div class="p-4 sm:p-6 flex flex-wrap items-center justify-between gap-4 hover:bg-slate-100/50 dark:hover:bg-slate-800/40 transition-colors">
+                        <div class="flex items-center gap-4">
+                            <span class="font-mono text-slate-400 font-bold">03</span>
+                            <span class="font-black tracking-wide text-slate-900 dark:text-white">NAFAY KHAN</span>
+                        </div>
+                        <a href="https://www.tiktok.com/@maliknafayoffical" target="_blank" class="text-xs bg-blue-50 text-blue-600 hover:bg-blue-100 font-bold px-4 py-2 rounded-lg transition-colors dark:bg-blue-950/50 dark:text-blue-400">Stream Track</a>
+                    </div>
+                    <!-- Track 4 -->
+                    <div class="p-4 sm:p-6 flex flex-wrap items-center justify-between gap-4 hover:bg-slate-100/50 dark:hover:bg-slate-800/40 transition-colors">
+                        <div class="flex items-center gap-4">
+                            <span class="font-mono text-slate-400 font-bold">04</span>
+                            <span class="font-black tracking-wide text-slate-900 dark:text-white">BOYZZ</span>
+                        </div>
+                        <a href="https://www.tiktok.com/@maliknafayoffical" target="_blank" class="text-xs bg-blue-50 text-blue-600 hover:bg-blue-100 font-bold px-4 py-2 rounded-lg transition-colors dark:bg-blue-950/50 dark:text-blue-400">Stream Track</a>
+                    </div>
+                    <!-- Track 5 -->
+                    <div class="p-4 sm:p-6 flex flex-wrap items-center justify-between gap-4 hover:bg-slate-100/50 dark:hover:bg-slate-800/40 transition-colors">
+                        <div class="flex items-center gap-4">
+                            <span class="font-mono text-slate-400 font-bold">05</span>
+                            <span class="font-black tracking-wide text-slate-900 dark:text-white">GENZ</span>
+                        </div>
+                        <a href="https://www.tiktok.com/@maliknafayoffical" target="_blank" class="text-xs bg-blue-50 text-blue-600 hover:bg-blue-100 font-bold px-4 py-2 rounded-lg transition-colors dark:bg-blue-950/50 dark:text-blue-400">Stream Track</a>
+                    </div>
+                    <!-- Track 6 -->
+                    <div class="p-4 sm:p-6 flex flex-wrap items-center justify-between gap-4 hover:bg-slate-100/50 dark:hover:bg-slate-800/40 transition-colors">
+                        <div class="flex items-center gap-4">
+                            <span class="font-mono text-slate-400 font-bold">06</span>
+                            <span class="font-black tracking-wide text-slate-900 dark:text-white">FOREX ABDULLAH</span>
+                        </div>
+                        <a href="https://www.tiktok.com/@maliknafayoffical" target="_blank" class="text-xs bg-blue-50 text-blue-600 hover:bg-blue-100 font-bold px-4 py-2 rounded-lg transition-colors dark:bg-blue-950/50 dark:text-blue-400">Stream Track</a>
+                    </div>
+                    <!-- Track 7 (Coming Soon) -->
+                    <div class="p-4 sm:p-6 flex flex-wrap items-center justify-between gap-4 bg-slate-100/20 dark:bg-slate-950/10">
+                        <div class="flex items-center gap-4">
+                            <span class="font-mono text-slate-300 font-bold">07</span>
+                            <span class="font-bold text-slate-400 dark:text-slate-500 italic">PAKPATTAN</span>
+                        </div>
+                        <span class="text-xs bg-amber-50 text-amber-700 font-bold px-3 py-1 rounded-md uppercase tracking-wider dark:bg-amber-950/40 dark:text-amber-400">Coming Soon</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 4. CORE ENGINE NAVIGATION CONTROLS -->
+        <section class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <!-- Privacy Trigger -->
+            <button onclick="launchPrivacyTab()" class="hover-glow-card text-left bg-slate-50 border border-slate-200 rounded-2xl p-6 transition-all cursor-pointer dark:bg-slate-900 dark:border-slate-800">
+                <div class="flex items-center gap-4">
+                    <div class="p-3 bg-red-50 text-red-600 rounded-xl dark:bg-red-950/50 dark:text-red-400">🛡️</div>
+                    <div>
+                        <h4 class="text-xl font-bold text-slate-900 dark:text-white">Legal Privacy Policies</h4>
+                        <p class="text-slate-500 text-sm mt-1 dark:text-slate-400">Open legal provisions and PECA compliance mandates in an independent context window.</p>
+                    </div>
+                </div>
+            </button>
+
+            <!-- AI Engine Reference Trigger -->
+            <a href="https://gemini.google.com/app" target="_blank" class="hover-glow-card block text-left bg-slate-50 border border-slate-200 rounded-2xl p-6 transition-all dark:bg-slate-900 dark:border-slate-800">
+                <div class="flex items-center gap-4">
+                    <div class="p-3 bg-blue-50 text-blue-600 rounded-xl dark:bg-blue-950/50 dark:text-blue-400">⚡</div>
+                    <div>
+                        <h4 class="text-xl font-bold text-slate-900 dark:text-white">Person AI Assistant</h4>
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z" />
+                        <p class="text-slate-500 text-sm mt-1 dark:text-slate-400">Deploy primary cognitive models directly through verified deployment connections.</p>
+                    </div>
+                </div>
+            </a>
+        </section>
+
+        <!-- 5. NETWORKS & LINKAGES GRAPH (10 PLATFORM CHANNELS) -->
+        <section class="space-y-6">
+            <div class="border-l-4 border-blue-600 pl-4">
+                <h3 class="text-3xl font-black uppercase text-slate-900 dark:text-white">Verified External Networks</h3>
+                <p class="text-slate-500 text-sm dark:text-slate-400">Integrated tracking profiles maintained by Nafay Develops Labs.</p>
+            </div>
+
+            <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4">
+                <!-- Socials -->
+                <div class="p-4 bg-slate-50 border border-slate-200 rounded-xl font-bold text-slate-700 text-center dark:bg-slate-900 dark:border-slate-800 dark:text-slate-300">Snapchat</div>
+                <div class="p-4 bg-slate-50 border border-slate-200 rounded-xl font-bold text-slate-700 text-center dark:bg-slate-900 dark:border-slate-800 dark:text-slate-300">Instagram</div>
+                <div class="p-4 bg-slate-50 border border-slate-200 rounded-xl font-bold text-slate-700 text-center dark:bg-slate-900 dark:border-slate-800 dark:text-slate-300">Threads</div>
+                <div class="p-4 bg-slate-50 border border-slate-200 rounded-xl font-bold text-slate-700 text-center dark:bg-slate-900 dark:border-slate-800 dark:text-slate-300">Contact Number</div>
+                
+                <!-- TikTok Nodes -->
+                <a href="https://www.tiktok.com/@maliknafayoffical" target="_blank" class="p-4 bg-blue-50 border border-blue-200 hover:bg-blue-100 text-blue-700 rounded-xl text-center font-bold text-sm truncate block dark:bg-blue-950/40 dark:border-blue-900 dark:text-blue-400">@maliknafayoffical</a>
+                <a href="https://www.tiktok.com/@pakpattan123" target="_blank" class="p-4 bg-blue-50 border border-blue-200 hover:bg-blue-100 text-blue-700 rounded-xl text-center font-bold text-sm truncate block dark:bg-blue-950/40 dark:border-blue-900 dark:text-blue-400">@pakpattan123</a>
+                <a href="https://www.tiktok.com/@nafayedits7" target="_blank" class="p-4 bg-blue-50 border border-blue-200 hover:bg-blue-100 text-blue-700 rounded-xl text-center font-bold text-sm truncate block dark:bg-blue-950/40 dark:border-blue-900 dark:text-blue-400">@nafayedits7</a>
+                <a href="https://www.tiktok.com/@pakpattan222" target="_blank" class="p-4 bg-blue-50 border border-blue-200 hover:bg-blue-100 text-blue-700 rounded-xl text-center font-bold text-sm truncate block dark:bg-blue-950/40 dark:border-blue-900 dark:text-blue-400">@pakpattan222</a>
+                <a href="https://www.tiktok.com/@ptiofficail" target="_blank" class="p-4 bg-blue-50 border border-blue-200 hover:bg-blue-100 text-blue-700 rounded-xl text-center font-bold text-sm truncate block dark:bg-blue-950/40 dark:border-blue-900 dark:text-blue-400">@ptiofficail</a>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- FOOTER TERMINAL CREDITS -->
+    <footer class="border-t border-slate-200 bg-slate-50 py-8 text-center transition-colors duration-300 dark:bg-slate-950 dark:border-slate-900">
+        <p class="text-sm font-bold text-slate-500 dark:text-slate-400">&copy; 2026 Eleven Pro Raps. Engineered Securely by Nafay Develops Labs.</p>
+    </footer>
+
+
+    <!-- ================= AUTHENTICATION MODAL ENGINE ================= -->
+    <div id="signin-modal" class="hidden fixed inset-0 bg-black/60 backdrop-blur-md z-50 flex items-center justify-center p-4">
+        
+        <!-- Step 1: Input Matrix -->
+        <div id="modal-step-1" class="w-full max-w-md bg-white border border-slate-200 rounded-3xl p-6 md:p-8 shadow-2xl relative">
+            <button onclick="closeSignInModal()" class="absolute top-4 right-4 text-slate-400 hover:text-slate-600 font-bold text-xl cursor-pointer">&times;</button>
+            <h4 class="text-2xl font-black text-slate-900 tracking-tight">Access Lab Privileges</h4>
+            <p class="text-sm text-slate-500 mt-1">Get more experience with sign up than a standard profile layout.</p>
+            
+            <div class="mt-6 space-y-4">
+                <div>
+                    <label class="block text-xs font-bold uppercase tracking-wider text-slate-400 mb-1">Registered Google Node</label>
+                    <input type="email" id="user-email" placeholder="username@gmail.com" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-slate-900 font-medium focus:outline-none focus:border-blue-600 text-sm">
+                    <p id="email-error" class="hidden text-xs font-semibold text-red-600 mt-1">Input configuration mismatch. Requires matching valid "@gmail.com" identity.</p>
+                </div>
+                <button onclick="processGmailValidation()" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3.5 rounded-xl shadow-lg transition-all cursor-pointer">
+                    Verify Account
+                </button>
+            </div>
+        </div>
+
+        <!-- Step 2: Scanner Simulation Engine -->
+        <div id="modal-step-2" class="hidden w-full max-w-md bg-white border border-slate-200 rounded-3xl p-8 shadow-2xl text-center">
+            <div class="w-16 h-16 border-4 border-blue-600 border-t-transparent rounded-full animate-spin mx-auto mb-6"></div>
+            <h4 class="text-xl font-black text-slate-900">Synchronizing Identity</h4>
+            <p class="text-sm text-slate-500 mt-2">Scanner execution handling running securely. Taking 2-5 standard cycles...</p>
+            <div class="mt-4 bg-slate-50 border border-slate-200 rounded-xl p-3 font-mono text-xs text-slate-500" id="scanner-timer">
+                Awaiting connection verification...
+            </div>
+        </div>
+
+        <!-- Step 3: Avatar Bios Selector Grid -->
+        <div id="modal-step-3" class="hidden w-full max-w-lg bg-white border border-slate-200 rounded-3xl p-6 md:p-8 shadow-2xl max-h-[85vh] overflow-y-auto">
+            <h4 class="text-2xl font-black text-slate-900">Select Professional Profile Avatar</h4>
+            <p class="text-sm text-slate-500 mt-1">Select real user bio profiles. 10 Free nodes active, 5 premium nodes locked.</p>
+            
+            <!-- Real Mans Bio Grid Layout -->
+            <div class="grid grid-cols-2 sm:grid-cols-3 gap-3 mt-6">
+                <!-- Free 1-10 -->
+                <button onclick="selectUserAvatar('👨‍💼 Dev Malik')" class="p-3 border border-slate-200 rounded-xl text-left hover:border-blue-500 bg-slate-50 cursor-pointer">
+                    <div class="text-2xl">👨‍💼</div><div class="text-xs font-bold text-slate-800 mt-1">Dev Malik</div><div class="text-[10px] text-green-600 font-bold">FREE</div>
+                </button>
+                <button onclick="selectUserAvatar('👨‍🎤 Rap Artist')" class="p-3 border border-slate-200 rounded-xl text-left hover:border-blue-500 bg-slate-50 cursor-pointer">
+                    <div class="text-2xl">👨‍🎤</div><div class="text-xs font-bold text-slate-800 mt-1">Rap Artist</div><div class="text-[10px] text-green-600 font-bold">FREE</div>
+                </button>
+                <button onclick="selectUserAvatar('👨‍💻 Nafay Lab Operator')" class="p-3 border border-slate-200 rounded-xl text-left hover:border-blue-500 bg-slate-50 cursor-pointer">
+                    <div class="text-2xl">👨‍💻</div><div class="text-xs font-bold text-slate-800 mt-1">Lab Operator</div><div class="text-[10px] text-green-600 font-bold">FREE</div>
+                </button>
+                <button onclick="selectUserAvatar('👨‍🚀 Audio Engineer')" class="p-3 border border-slate-200 rounded-xl text-left hover:border-blue-500 bg-slate-50 cursor-pointer">
+                    <div class="text-2xl">👨‍🚀</div><div class="text-xs font-bold text-slate-800 mt-1">Audio Eng</div><div class="text-[10px] text-green-600 font-bold">FREE</div>
+                </button>
+                <button onclick="selectUserAvatar('😎 Executive Producer')" class="p-3 border border-slate-200 rounded-xl text-left hover:border-blue-500 bg-slate-50 cursor-pointer">
+                    <div class="text-2xl">😎</div><div class="text-xs font-bold text-slate-800 mt-1">Producer</div><div class="text-[10px] text-green-600 font-bold">FREE</div>
+                </button>
+                <button onclick="selectUserAvatar('🧔 Lead Vocalist')" class="p-3 border border-slate-200 rounded-xl text-left hover:border-blue-500 bg-slate-50 cursor-pointer">
+                    <div class="text-2xl">🧔</div><div class="text-xs font-bold text-slate-800 mt-1">Lead Vocal</div><div class="text-[10px] text-green-600 font-bold">FREE</div>
+                </button>
+                <button onclick="selectUserAvatar('👨‍ Cyber Analyst')" class="p-3 border border-slate-200 rounded-xl text-left hover:border-blue-500 bg-slate-50 cursor-pointer">
+                    <div class="text-2xl">👨‍</div><div class="text-xs font-bold text-slate-800 mt-1">Cyber Analyst</div><div class="text-[10px] text-green-600 font-bold">FREE</div>
+                </button>
+                <button onclick="selectUserAvatar('👨‍💼 Project Manager')" class="p-3 border border-slate-200 rounded-xl text-left hover:border-blue-500 bg-slate-50 cursor-pointer">
+                    <div class="text-2xl">👨‍💼</div><div class="text-xs font-bold text-slate-800 mt-1">Manager</div><div class="text-[10px] text-green-600 font-bold">FREE</div>
+                </button>
+                <button onclick="selectUserAvatar('👨‍🔧 Support Specialist')" class="p-3 border border-slate-200 rounded-xl text-left hover:border-blue-500 bg-slate-50 cursor-pointer">
+                    <div class="text-2xl">👨‍🔧</div><div class="text-xs font-bold text-slate-800 mt-1">Support Spec</div><div class="text-[10px] text-green-600 font-bold">FREE</div>
+                </button>
+                <button onclick="selectUserAvatar('👨‍🎨 System Architect')" class="p-3 border border-slate-200 rounded-xl text-left hover:border-blue-500 bg-slate-50 cursor-pointer">
+                    <div class="text-2xl">👨‍🎨</div><div class="text-xs font-bold text-slate-800 mt-1">Architect</div><div class="text-[10px] text-green-600 font-bold">FREE</div>
+                </button>
+
+                <!-- Locked 5 -->
+                <div class="p-3 border border-dashed border-slate-200 rounded-xl bg-slate-100 opacity-60 relative select-none">
+                    <div class="text-2xl">🤴</div><div class="text-xs font-bold text-slate-400 mt-1">Platinum King</div><div class="text-[10px] text-red-600 font-bold">LOCKED</div>
+                </div>
+                <div class="p-3 border border-dashed border-slate-200 rounded-xl bg-slate-100 opacity-60 relative select-none">
+                    <div class="text-2xl">🥷</div><div class="text-xs font-bold text-slate-400 mt-1">Shadow Elite</div><div class="text-[10px] text-red-600 font-bold">LOCKED</div>
+                </div>
+                <div class="p-3 border border-dashed border-slate-200 rounded-xl bg-slate-100 opacity-60 relative select-none">
+                    <div class="text-2xl">🧑‍🚀</div><div class="text-xs font-bold text-slate-400 mt-1">Deep Beats Pro</div><div class="text-[10px] text-red-600 font-bold">LOCKED</div>
+                </div>
+                <div class="p-3 border border-dashed border-slate-200 rounded-xl bg-slate-100 opacity-60 relative select-none">
+                    <div class="text-2xl">👨‍🎓</div><div class="text-xs font-bold text-slate-400 mt-1">Senior Lab Director</div><div class="text-[10px] text-red-600 font-bold">LOCKED</div>
+                </div>
+                <div class="p-3 border border-dashed border-slate-200 rounded-xl bg-slate-100 opacity-60 relative select-none">
+                    <div class="text-2xl">🏆</div><div class="text-xs font-bold text-slate-400 mt-1">Master Headliner</div><div class="text-[10px] text-red-600 font-bold">LOCKED</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Step 4: Upgrade Upsell Screen -->
+        <div id="modal-step-4" class="hidden w-full max-w-md bg-white border border-slate-200 rounded-3xl p-8 shadow-2xl text-center">
+            <div class="text-5xl mb-4">⭐</div>
+            <h4 class="text-2xl font-black text-slate-900">Unlock Master Class Tiers</h4>
+            <p class="text-sm text-slate-500 mt-2">Unlock remaining locked nodes, premium soundboards, and exclusive track releases instantly.</p>
+            
+            <div class="mt-6 flex flex-col gap-3">
+                <button onclick="completeAuthenticationFlow(true)" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 rounded-xl transition-all cursor-pointer">
+                    Upgrade Account Now
+                </button>
+                <button onclick="completeAuthenticationFlow(false)" class="w-full bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold py-3 rounded-xl transition-all cursor-pointer">
+                    Not Now
+                </button>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- ================= JAVASCRIPT LOGIC CONTROLS ENGINE ================= -->
+    <script>
+        // Global State Tree variables
+        let selectedAvatarData = "👨‍💼 Dev Malik";
+        let isDarkMode = false;
+
+        // Settings Dropdown Controller
+        function toggleSettingsMenu() {
+            const menu = document.getElementById('settings-menu');
+            menu.classList.toggle('hidden');
+        }
+
+        // Generic Event Actions Handler
+        function handleMenuAction(message) {
+            alert(message);
+            document.getElementById('settings-menu').classList.add('hidden');
+        }
+
+        // Clip-board Data Action 
+        function copyWebsiteLink() {
+            navigator.clipboard.writeText(window.location.href);
+            alert("Success: Eleven Pro Raps environment link saved to local clipboard arrays.");
+            document.getElementById('settings-menu').classList.add('hidden');
+        }
+
+        // Theme Toggle Controller (Light / Dark Mode Routing)
+        function toggleTheme() {
+            isDarkMode = !isDarkMode;
+            const body = document.getElementById('app-body');
+            const nav = document.querySelector('header');
+            
+            if (isDarkMode) {
+                body.classList.remove('bg-white', 'text-slate-900');
+                body.classList.add('bg-slate-950', 'text-white');
+                nav.classList.add('dark');
+            } else {
+                body.classList.remove('bg-slate-950', 'text-white');
+                body.classList.add('bg-white', 'text-slate-900');
+                nav.classList.remove('dark');
+            }
+            document.getElementById('settings-menu').classList.add('hidden');
+        }
+
+        // Authentication Modal Access Rules
+        function openSignInModal() {
+            document.getElementById('signin-modal').classList.remove('hidden');
+            document.getElementById('modal-step-1').classList.remove('hidden');
+            document.getElementById('modal-step-2').classList.add('hidden');
+            document.getElementById('modal-step-3').classList.add('hidden');
+            document.getElementById('modal-step-4').classList.add('hidden');
+        }
+
+        function closeSignInModal() {
+            document.getElementById('signin-modal').classList.add('hidden');
+        }
+
+        // Step 1: Input Scanner Validation Rule Handler
+        function processGmailValidation() {
+            const emailInput = document.getElementById('user-email').value;
+            const errorLabel = document.getElementById('email-error');
+            
+            // Strictly check if input strings terminate exactly in user target arrays
+            if (emailInput.toLowerCase().endsWith('@gmail.com') && emailInput.length > 10) {
+                errorLabel.classList.add('hidden');
+                executeScannerSimulation();
+            } else {
+                errorLabel.classList.remove('hidden');
+            }
+        }
+
+        // Step 2: Scanner Simulation Variable Sequence Loop
+        function executeScannerSimulation() {
+            document.getElementById('modal-step-1').classList.add('hidden');
+            document.getElementById('modal-step-2').classList.remove('hidden');
+            
+            const timerContainer = document.getElementById('scanner-timer');
+            // Calculate randomized timing between user spec 2 to 5 standard seconds
+            const simulatedSeconds = Math.floor(Math.random() * 4) + 2; 
+            let currentCycle = 0;
+
+            const trackingInterval = setInterval(() => {
+                currentCycle++;
+                timerContainer.innerText = `Parsing digital nodes... Cycle [${currentCycle}/${simulatedSeconds}s] executed.`;
+                
+                if (currentCycle >= simulatedSeconds) {
+                    clearInterval(trackingInterval);
+                    // route user directly to profile matrix assignment zone
+                    document.getElementById('modal-step-2').classList.add('hidden');
+                    document.getElementById('modal-step-3').classList.remove('hidden');
+                }
+            }, 1000);
+        }
+
+        // Step 3: Bio Array Input Extraction
+        function selectUserAvatar(avatarBioString) {
+            selectedAvatarData = avatarBioString;
+            // Transition directly into product configuration upsell panel
+            document.getElementById('modal-step-3').classList.add('hidden');
+            document.getElementById('modal-step-4').classList.remove('hidden');
+        }
+
+        // Step 4: Execution Completion and Element Replacement Routing
+        function completeAuthenticationFlow(upgraded) {
+            const authContainer = document.getElementById('auth-zone');
+            
+            // Build real component replacement code blocks
+            authContainer.innerHTML = `
+                <div class="flex items-center gap-3 bg-slate-100 border border-slate-200 px-4 py-1.5 rounded-2xl dark:bg-slate-800 dark:border-slate-700">
+                    <span class="text-base">${selectedAvatarData.split(' ')[0]}</span>
+                    <div class="text-left">
+                        <p class="text-xs font-black text-slate-900 dark:text-white leading-none">${selectedAvatarData.split(' ').slice(1).join(' ')}</p>
+                        <p class="text-[9px] font-bold ${upgraded ? 'text-amber-500' : 'text-slate-400'} tracking-wider uppercase mt-0.5">${upgraded ? 'PRO LAB ACCOUNT' : 'STANDARD NODE'}</p>
+                    </div>
+                </div>
+            `;
+            closeSignInModal();
+        }
+
+        // Logout Processing Logic
+        function triggerLogout() {
+            const authContainer = document.getElementById('auth-zone');
+            authContainer.innerHTML = `
+                <button onclick="openSignInModal()" class="bg-blue-600 hover:bg-blue-700 text-white text-sm font-bold px-6 py-2.5 rounded-xl shadow-sm transition-all duration-200 transform active:scale-95 cursor-pointer">
+                    Sign In
+                </button>
+            `;
+            document.getElementById('settings-menu').classList.add('hidden');
+            alert("System Event: Credentials cleared from current running thread pools.");
+        }
+
+        // Independent Privacy Isolation Context Tab Launcher
+        function launchPrivacyTab() {
+            const legalWindow = window.open('', '_blank');
+            legalWindow.document.write(`
+                <!DOCTYPE html>
+                <html lang="en">
+                <head>
+                    <meta charset="UTF-8">
+                    <title>Privacy Policy & Terms - Eleven Pro Raps</title>
+                    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"><\/script>
+                    <style>
+                        .hover-glow-card { transition: all 0.4s ease; }
+                        .hover-glow-card:hover { transform: rotate(-3deg) translateY(-4px); box-shadow: 0 20px 40px rgba(37, 99, 235, 0.30); border-color: rgba(37, 99, 235, 0.5); }
+                        .hover-glow-warning { transition: all 0.4s ease; }
+                        .hover-glow-warning:hover { transform: rotate(-3deg) translateY(-4px); box-shadow: 0 20px 40px rgba(220, 38, 38, 0.30); border-color: rgba(220, 38, 38, 0.5); }
+                    <\/style>
+                </head>
+                <body class="bg-white text-slate-900 font-sans antialiased p-6 md:p-12 max-w-4xl mx-auto space-y-8">
+                    <header class="border-b border-slate-200 pb-6">
+                        <h1 class="text-4xl font-black text-slate-900">Privacy Policy & Terms of Service</h1>
+                        <p class="text-sm text-slate-500 mt-2">Effective Date: June 16, 2026 • Jurisdiction: Punjab, Pakistan</p>
+                    </header>
+                    <main class="space-y-6">
+                        <p class="text-slate-600">Welcome to <strong>Eleven Pro Raps</strong>. Your privacy and the security of our digital assets are of paramount importance to us. This document governs your access to and use of our platform, including all music, media, lyrics, and code provided by <strong>Nafay Develop and Labs</strong>.</p>
+                        
+                        <div class="hover-glow-card bg-slate-50 border border-slate-200 p-6 rounded-xl">
+                            <h3 class="text-xl font-bold mb-2">1. Information Collection and Use</h3>
+                            <p class="text-slate-600">We respect your privacy. Eleven Pro Raps only collects basic information necessary to enhance your user experience, such as analytics data for track plays and user-submitted forms. We do not sell, trade, or rent your personal information to third parties.</p>
+                        </div>
+
+                        <div class="hover-glow-card bg-slate-50 border border-slate-200 p-6 rounded-xl">
+                            <h3 class="text-xl font-bold mb-2">2. Intellectual Property Rights</h3>
+                            <p class="text-slate-600">All content features on this website, including but not limited to rap tracks, audio streams, lyrics, branding, and custom web components, are the exclusive intellectual property of <strong>Nafay Develop and Labs</strong> and artist <strong>Malik Nafay</strong>. Unauthorized redistribution, sampling, or commercial exploitation of the audio or code without explicit written consent is strictly prohibited.</p>
+                        </div>
+
+                        <div class="hover-glow-warning bg-slate-50 border-2 border-red-200 p-6 rounded-xl relative overflow-hidden">
+                            <h3 class="text-xl font-bold text-red-600 mb-2">3. Strict Cyber Security & Anti-Hacking Policy</h3>
+                            <p class="text-slate-700 font-bold mb-3">⚠️ Security Warning & Financial Penalties</p>
+                            <p class="text-slate-600 mb-2">Any individual, group, or entity that attempts to compromise, hack, deface, reverse-engineer, inject malicious scripts, or launch Denial of Service (DoS/DDoS) attacks against Eleven Pro Raps or the servers of Nafay Develop and Labs shall be held legally and financially liable.</p>
+                            <div class="bg-white p-3 border-l-4 border-red-600 font-mono text-sm font-bold text-slate-900 my-2">Financial Fine: Contractual assessment fine of $9,999 USD payable in equivalent Pakistani Rupees.</div>
+                            <p class="text-xs text-slate-500">All digital actions are governed by regional laws of Punjab, Pakistan. Violators will be aggressively prosecuted under the Prevention of Electronic Crimes Act (PECA) and reported directly to the Federal Investigation Agency (FIA) Cyber Crime Wing.</p>
+                        </div>
+
+                        <div class="hover-glow-card bg-slate-50 border border-slate-200 p-6 rounded-xl">
+                            <h3 class="text-xl font-bold mb-2">4. Limitation of Liability</h3>
+                            <p class="text-slate-600">Nafay Develop and Labs provides this platform on an "as-is" basis. While we strive to maintain uninterrupted access to our music and web features, we are not liable for any temporary server downtimes or technical interruptions.</p>
+                        </div>
+
+                        <div class="hover-glow-card bg-slate-50 border border-slate-200 p-6 rounded-xl">
+                            <h3 class="text-xl font-bold mb-2">5. Contact Information</h3>
+                            <p class="text-slate-600">For legal inquiries, licensing permissions, or privacy concerns regarding the music of Malik Nafay, please contact us directly through the official dashboard of Nafay Develop and Labs.</p>
+                        </div>
+                    </main>
+                </body>
+                </html>
+            `);
+            legalWindow.document.close();
+        }
+    </script>
+</body>
+</html>
