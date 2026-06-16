@@ -13,7 +13,7 @@
         }
         .hover-glow-card:hover {
             transform: translateY(-2px);
-            box-shadow: 0 12px 30px rgba(37, 99, 235, 0.30); /* Precise 30% Blue Glow */
+            box-shadow: 0 12px 30px rgba(37, 99, 235, 0.30);
             border-color: rgba(37, 99, 235, 0.4);
         }
         
@@ -22,7 +22,7 @@
         }
         .hover-glow-warning:hover {
             transform: translateY(-2px);
-            box-shadow: 0 12px 30px rgba(220, 38, 38, 0.30); /* Precise 30% Red Glow */
+            box-shadow: 0 12px 30px rgba(220, 38, 38, 0.30);
             border-color: rgba(220, 38, 38, 0.4);
         }
 
@@ -34,9 +34,31 @@
         .moving-logo {
             animation: professionalPulse 2.5s ease-in-out infinite;
         }
+
+        /* SVG Circular Loader Animation Properties */
+        .circle-svg-loader {
+            transform: rotate(-90deg);
+        }
+        .circle-svg-bg {
+            fill: none;
+            stroke: #e2e8f0;
+        }
+        .circle-svg-progress {
+            fill: none;
+            stroke: #2563eb;
+            stroke-linecap: round;
+            transition: stroke-dashoffset 1s linear;
+        }
     </style>
 </head>
 <body id="app-body" class="bg-white text-slate-900 font-sans antialiased transition-colors duration-300 selection:bg-blue-100">
+
+    <!-- CRITICAL APPLICATION REPLACEMENT SHELL FOR AGE BAN -->
+    <div id="app-termination-block" class="hidden fixed inset-0 bg-slate-950 flex flex-col items-center justify-center p-4 z-[9999]">
+        <div class="text-6xl mb-6">⚠️</div>
+        <h1 class="text-4xl md:text-6xl font-black text-red-600 tracking-wider uppercase text-center">THE APP IS NOT SUPPORTED</h1>
+        <p class="text-slate-400 mt-4 text-center font-medium max-w-md">Security protocol enforced. Access privileges permanently suspended due to age verification parameters.</p>
+    </div>
 
     <!-- Top Decorative Status bar -->
     <div class="h-2 bg-gradient-to-r from-blue-600 via-indigo-600 to-red-600"></div>
@@ -301,197 +323,70 @@
     </footer>
 
 
-    <!-- ================= MODERNIZED HIGH-PERFORMANCE SIGN IN WIZARD ================= -->
+    <!-- ================= MODERNIZED THREE-OPTION MOOD-DRIVEN SIGN IN WIZARD ================= -->
     <div id="signin-modal" class="hidden fixed inset-0 bg-slate-950/80 backdrop-blur-md z-50 flex items-center justify-center p-4">
         
-        <!-- STEP 1: GMAIL ENTRY PANEL -->
+        <!-- STEP 1: THREE-OPTION SELECTOR PANEL -->
         <div id="wizard-step-1" class="w-full max-w-md bg-white border border-slate-200 rounded-3xl p-6 md:p-8 shadow-2xl relative">
             <button onclick="closeSignInWizard()" class="absolute top-4 right-4 text-slate-400 hover:text-slate-600 font-bold text-xl cursor-pointer">&times;</button>
-            <h4 class="text-2xl font-black text-slate-900 tracking-tight uppercase">Access Lab Privileges</h4>
-            <p class="text-sm text-slate-500 mt-1">Initialize authentication connection array.</p>
+            <h4 class="text-2xl font-black text-slate-900 tracking-tight uppercase">Select Sign In Method</h4>
+            <p class="text-sm text-slate-500 mt-1">Choose your gateway tracking protocol interface.</p>
             
-            <div class="mt-6 space-y-4">
-                <div>
-                    <label class="block text-xs font-bold uppercase tracking-wider text-slate-400 mb-1">Registered Google Node</label>
-                    <input type="email" id="user-email" placeholder="username@gmail.com" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-slate-900 font-medium focus:outline-none focus:border-blue-600 text-sm">
-                    <p id="email-error" class="hidden text-xs font-semibold text-red-600 mt-1">Input configuration mismatch. Requires matching valid "@gmail.com" identity.</p>
+            <div class="mt-6 space-y-3">
+                <button onclick="selectAuthMethod('Gmail')" class="w-full flex items-center justify-between p-4 bg-slate-50 border border-slate-200 hover:border-blue-500 rounded-xl font-bold text-slate-800 transition-all cursor-pointer">
+                    <span>Google Gmail Account</span> <span class="text-lg">📧</span>
+                </button>
+                <button onclick="selectAuthMethod('Phone')" class="w-full flex items-center justify-between p-4 bg-slate-50 border border-slate-200 hover:border-blue-500 rounded-xl font-bold text-slate-800 transition-all cursor-pointer">
+                    <span>Phone Number Auth</span> <span class="text-lg">📱</span>
+                </button>
+                <button onclick="selectAuthMethod('Guest')" class="w-full flex items-center justify-between p-4 bg-slate-50 border border-slate-200 hover:border-blue-500 rounded-xl font-bold text-slate-800 transition-all cursor-pointer">
+                    <span>Guest Mode Terminal</span> <span class="text-lg">🥷</span>
+                </button>
+            </div>
+
+            <!-- Dynamic Sub-input Context fields -->
+            <div id="method-input-zone" class="mt-4 hidden space-y-3 border-t border-slate-100 pt-4">
+                <div id="gmail-field-wrap" class="hidden">
+                    <label class="block text-xs font-bold uppercase text-slate-400 mb-1">Enter Gmail Address</label>
+                    <input type="email" id="input-gmail-node" placeholder="username@gmail.com" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-2.5 text-slate-900 text-sm focus:outline-none focus:border-blue-600 font-medium">
                 </div>
-                <button onclick="triggerGmailScanner()" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3.5 rounded-xl shadow-md transition-all cursor-pointer">
-                    Verify Account
+                <div id="phone-field-wrap" class="hidden">
+                    <label class="block text-xs font-bold uppercase text-slate-400 mb-1">Enter Mobile Number</label>
+                    <input type="text" id="input-phone-node" placeholder="+92 300 1234567" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-2.5 text-slate-900 text-sm focus:outline-none focus:border-blue-600 font-medium">
+                </div>
+                <p id="method-error" class="hidden text-xs font-semibold text-red-600">Configuration field mismatch. Please input real structural credentials.</p>
+                <button onclick="triggerVerificationScanner()" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 rounded-xl shadow-md transition-all cursor-pointer uppercase text-xs tracking-wider">
+                    Initiate Security Handshake
                 </button>
             </div>
         </div>
 
-        <!-- STEP 2: STABILIZED 5-7 SECONDS TIME ENGINE SCANNER -->
+        <!-- STEP 2: STABILIZED 10-15 SECONDS SECURITY SCANNER CHANNELS -->
         <div id="wizard-step-2" class="hidden w-full max-w-md bg-white border border-slate-200 rounded-3xl p-8 shadow-2xl text-center">
             <div class="w-14 h-14 border-4 border-blue-600 border-t-transparent rounded-full animate-spin mx-auto mb-6"></div>
             <h4 class="text-xl font-black text-slate-900 uppercase tracking-tight">Synchronizing Node Security</h4>
-            <p class="text-sm text-slate-500 mt-2">Running rigorous secure socket scans. Please wait 5-7 seconds...</p>
+            <p class="text-sm text-slate-500 mt-2">Running rigorous secure socket scans. Mandatory wait: 10-15 seconds.</p>
             <div class="mt-5 bg-slate-50 border border-slate-200 rounded-xl p-3 font-mono text-xs text-blue-600 font-bold" id="live-countdown-timer">
                 Awaiting tracking sequence loop...
             </div>
         </div>
 
-        <!-- STEP 3: HIGH FIDELITY PREMIUM AVATAR MATRICES (20 AVATARS) -->
-        <div id="wizard-step-3" class="hidden w-full max-w-2xl bg-white border border-slate-200 rounded-3xl p-6 md:p-8 shadow-2xl max-h-[85vh] overflow-y-auto">
+        <!-- STEP 3: 25 HIGH FIDELITY AVATARS (ALL 100% FREE & UNLOCKED) -->
+        <div id="wizard-step-3" class="hidden w-full max-w-3xl bg-white border border-slate-200 rounded-3xl p-6 md:p-8 shadow-2xl max-h-[85vh] overflow-y-auto">
             <div class="border-b border-slate-100 pb-4 mb-4">
                 <h4 class="text-2xl font-black text-slate-900 uppercase tracking-tight">Select Character Identity</h4>
-                <p class="text-sm text-slate-500 mt-1">10 Premium free nodes active, 10 advanced tracking nodes locked.</p>
+                <p class="text-sm text-slate-500 mt-1">25 Premium high-fidelity network identities active. 100% free deployment access.</p>
             </div>
             
-            <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
-                <!-- ================= 10 FREE ORIGINAL AVATARS ================= -->
-                <button onclick="selectWizardAvatar('🧔 Malik Khan')" class="p-3 border border-slate-200 rounded-xl text-left hover:border-blue-500 hover:bg-blue-50/20 transition-all cursor-pointer group">
-                    <div class="text-2xl group-hover:scale-110 transition-transform">🧔</div>
-                    <div class="text-xs font-black text-slate-800 mt-2 truncate">Malik Khan</div>
-                    <span class="text-[9px] bg-green-100 text-green-700 font-extrabold px-1.5 py-0.5 rounded uppercase tracking-wider block mt-1 w-max">FREE</span>
-                </button>
-                <button onclick="selectWizardAvatar('👨‍💻 Nafay Dev')" class="p-3 border border-slate-200 rounded-xl text-left hover:border-blue-500 hover:bg-blue-50/20 transition-all cursor-pointer group">
-                    <div class="text-2xl group-hover:scale-110 transition-transform">👨‍💻</div>
-                    <div class="text-xs font-black text-slate-800 mt-2 truncate">Nafay Dev</div>
-                    <span class="text-[9px] bg-green-100 text-green-700 font-extrabold px-1.5 py-0.5 rounded uppercase tracking-wider block mt-1 w-max">FREE</span>
-                </button>
-                <button onclick="selectWizardAvatar('🎤 Rap Master')" class="p-3 border border-slate-200 rounded-xl text-left hover:border-blue-500 hover:bg-blue-50/20 transition-all cursor-pointer group">
-                    <div class="text-2xl group-hover:scale-110 transition-transform">🎤</div>
-                    <div class="text-xs font-black text-slate-800 mt-2 truncate">Rap Master</div>
-                    <span class="text-[9px] bg-green-100 text-green-700 font-extrabold px-1.5 py-0.5 rounded uppercase tracking-wider block mt-1 w-max">FREE</span>
-                </button>
-                <button onclick="selectWizardAvatar('🎧 Audio Eng')" class="p-3 border border-slate-200 rounded-xl text-left hover:border-blue-500 hover:bg-blue-50/20 transition-all cursor-pointer group">
-                    <div class="text-2xl group-hover:scale-110 transition-transform">🎧</div>
-                    <div class="text-xs font-black text-slate-800 mt-2 truncate">Audio Eng</div>
-                    <span class="text-[9px] bg-green-100 text-green-700 font-extrabold px-1.5 py-0.5 rounded uppercase tracking-wider block mt-1 w-max">FREE</span>
-                </button>
-                <button onclick="selectWizardAvatar('😎 Beat Producer')" class="p-3 border border-slate-200 rounded-xl text-left hover:border-blue-500 hover:bg-blue-50/20 transition-all cursor-pointer group">
-                    <div class="text-2xl group-hover:scale-110 transition-transform">😎</div>
-                    <div class="text-xs font-black text-slate-800 mt-2 truncate">Beat Producer</div>
-                    <span class="text-[9px] bg-green-100 text-green-700 font-extrabold px-1.5 py-0.5 rounded uppercase tracking-wider block mt-1 w-max">FREE</span>
-                </button>
-                <button onclick="selectWizardAvatar('🥷 Sound Shadow')" class="p-3 border border-slate-200 rounded-xl text-left hover:border-blue-500 hover:bg-blue-50/20 transition-all cursor-pointer group">
-                    <div class="text-2xl group-hover:scale-110 transition-transform">🥷</div>
-                    <div class="text-xs font-black text-slate-800 mt-2 truncate">Sound Shadow</div>
-                    <span class="text-[9px] bg-green-100 text-green-700 font-extrabold px-1.5 py-0.5 rounded uppercase tracking-wider block mt-1 w-max">FREE</span>
-                </button>
-                <button onclick="selectWizardAvatar('🔥 Rhyme King')" class="p-3 border border-slate-200 rounded-xl text-left hover:border-blue-500 hover:bg-blue-50/20 transition-all cursor-pointer group">
-                    <div class="text-2xl group-hover:scale-110 transition-transform">🔥</div>
-                    <div class="text-xs font-black text-slate-800 mt-2 truncate">Rhyme King</div>
-                    <span class="text-[9px] bg-green-100 text-green-700 font-extrabold px-1.5 py-0.5 rounded uppercase tracking-wider block mt-1 w-max">FREE</span>
-                </button>
-                <button onclick="selectWizardAvatar('⚡ Cyber Agent')" class="p-3 border border-slate-200 rounded-xl text-left hover:border-blue-500 hover:bg-blue-50/20 transition-all cursor-pointer group">
-                    <div class="text-2xl group-hover:scale-110 transition-transform">⚡</div>
-                    <div class="text-xs font-black text-slate-800 mt-2 truncate">Cyber Agent</div>
-                    <span class="text-[9px] bg-green-100 text-green-700 font-extrabold px-1.5 py-0.5 rounded uppercase tracking-wider block mt-1 w-max">FREE</span>
-                </button>
-                <button onclick="selectWizardAvatar('🚀 Studio Lead')" class="p-3 border border-slate-200 rounded-xl text-left hover:border-blue-500 hover:bg-blue-50/20 transition-all cursor-pointer group">
-                    <div class="text-2xl group-hover:scale-110 transition-transform">🚀</div>
-                    <div class="text-xs font-black text-slate-800 mt-2 truncate">Studio Lead</div>
-                    <span class="text-[9px] bg-green-100 text-green-700 font-extrabold px-1.5 py-0.5 rounded uppercase tracking-wider block mt-1 w-max">FREE</span>
-                </button>
-                <button onclick="selectWizardAvatar('💎 Lyric Architect')" class="p-3 border border-slate-200 rounded-xl text-left hover:border-blue-500 hover:bg-blue-50/20 transition-all cursor-pointer group">
-                    <div class="text-2xl group-hover:scale-110 transition-transform">💎</div>
-                    <div class="text-xs font-black text-slate-800 mt-2 truncate">Lyric Architect</div>
-                    <span class="text-[9px] bg-green-100 text-green-700 font-extrabold px-1.5 py-0.5 rounded uppercase tracking-wider block mt-1 w-max">FREE</span>
-                </button>
-
-                <!-- ================= 10 FULLY CONTROLLED LOCKED AVATARS ================= -->
-                <button onclick="selectWizardAvatar('👑 Eleven Elite')" class="p-3 border border-slate-200 rounded-xl text-left bg-slate-50 hover:bg-amber-50/50 hover:border-amber-500 transition-all cursor-pointer group relative">
-                    <div class="text-2xl group-hover:rotate-12 transition-transform">👑</div>
-                    <div class="text-xs font-black text-slate-500 mt-2 truncate">Eleven Elite</div>
-                    <span class="text-[9px] bg-amber-100 text-amber-700 font-extrabold px-1.5 py-0.5 rounded uppercase tracking-wider block mt-1 w-max">LOCKED</span>
-                </button>
-                <button onclick="selectWizardAvatar('🪐 Cosmic Track')" class="p-3 border border-slate-200 rounded-xl text-left bg-slate-50 hover:bg-amber-50/50 hover:border-amber-500 transition-all cursor-pointer group relative">
-                    <div class="text-2xl group-hover:rotate-12 transition-transform">🪐</div>
-                    <div class="text-xs font-black text-slate-500 mt-2 truncate">Cosmic Track</div>
-                    <span class="text-[9px] bg-amber-100 text-amber-700 font-extrabold px-1.5 py-0.5 rounded uppercase tracking-wider block mt-1 w-max">LOCKED</span>
-                </button>
-                <button onclick="selectWizardAvatar('✨ Aura Special')" class="p-3 border border-slate-200 rounded-xl text-left bg-slate-50 hover:bg-amber-50/50 hover:border-amber-500 transition-all cursor-pointer group relative">
-                    <div class="text-2xl group-hover:rotate-12 transition-transform">✨</div>
-                    <div class="text-xs font-black text-slate-500 mt-2 truncate">Aura Special</div>
-                    <span class="text-[9px] bg-amber-100 text-amber-700 font-extrabold px-1.5 py-0.5 rounded uppercase tracking-wider block mt-1 w-max">LOCKED</span>
-                </button>
-                <button onclick="selectWizardAvatar('🔮 Synth Mage')" class="p-3 border border-slate-200 rounded-xl text-left bg-slate-50 hover:bg-amber-50/50 hover:border-amber-500 transition-all cursor-pointer group relative">
-                    <div class="text-2xl group-hover:rotate-12 transition-transform">🔮</div>
-                    <div class="text-xs font-black text-slate-500 mt-2 truncate">Synth Mage</div>
-                    <span class="text-[9px] bg-amber-100 text-amber-700 font-extrabold px-1.5 py-0.5 rounded uppercase tracking-wider block mt-1 w-max">LOCKED</span>
-                </button>
-                <button onclick="selectWizardAvatar('🦁 Pack Director')" class="p-3 border border-slate-200 rounded-xl text-left bg-slate-50 hover:bg-amber-50/50 hover:border-amber-500 transition-all cursor-pointer group relative">
-                    <div class="text-2xl group-hover:rotate-12 transition-transform">🦁</div>
-                    <div class="text-xs font-black text-slate-500 mt-2 truncate">Pack Director</div>
-                    <span class="text-[9px] bg-amber-100 text-amber-700 font-extrabold px-1.5 py-0.5 rounded uppercase tracking-wider block mt-1 w-max">LOCKED</span>
-                </button>
-                <button onclick="selectWizardAvatar('🧬 Cyber Matrix')" class="p-3 border border-slate-200 rounded-xl text-left bg-slate-50 hover:bg-amber-50/50 hover:border-amber-500 transition-all cursor-pointer group relative">
-                    <div class="text-2xl group-hover:rotate-12 transition-transform">🧬</div>
-                    <div class="text-xs font-black text-slate-500 mt-2 truncate">Cyber Matrix</div>
-                    <span class="text-[9px] bg-amber-100 text-amber-700 font-extrabold px-1.5 py-0.5 rounded uppercase tracking-wider block mt-1 w-max">LOCKED</span>
-                </button>
-                <button onclick="selectWizardAvatar('🏆 Grand Champion')" class="p-3 border border-slate-200 rounded-xl text-left bg-slate-50 hover:bg-amber-50/50 hover:border-amber-500 transition-all cursor-pointer group relative">
-                    <div class="text-2xl group-hover:rotate-12 transition-transform">🏆</div>
-                    <div class="text-xs font-black text-slate-500 mt-2 truncate">Grand Champion</div>
-                    <span class="text-[9px] bg-amber-100 text-amber-700 font-extrabold px-1.5 py-0.5 rounded uppercase tracking-wider block mt-1 w-max">LOCKED</span>
-                </button>
-                <button onclick="selectWizardAvatar('🎖️ Major Sound')" class="p-3 border border-slate-200 rounded-xl text-left bg-slate-50 hover:bg-amber-50/50 hover:border-amber-500 transition-all cursor-pointer group relative">
-                    <div class="text-2xl group-hover:rotate-12 transition-transform">🎖️</div>
-                    <div class="text-xs font-black text-slate-500 mt-2 truncate">Major Sound</div>
-                    <span class="text-[9px] bg-amber-100 text-amber-700 font-extrabold px-1.5 py-0.5 rounded uppercase tracking-wider block mt-1 w-max">LOCKED</span>
-                </button>
-                <button onclick="selectWizardAvatar('🎭 Flow Phantom')" class="p-3 border border-slate-200 rounded-xl text-left bg-slate-50 hover:bg-amber-50/50 hover:border-amber-500 transition-all cursor-pointer group relative">
-                    <div class="text-2xl group-hover:rotate-12 transition-transform">🎭</div>
-                    <div class="text-xs font-black text-slate-500 mt-2 truncate">Flow Phantom</div>
-                    <span class="text-[9px] bg-amber-100 text-amber-700 font-extrabold px-1.5 py-0.5 rounded uppercase tracking-wider block mt-1 w-max">LOCKED</span>
-                </button>
-                <button onclick="selectWizardAvatar('💰 Platinum Core')" class="p-3 border border-slate-200 rounded-xl text-left bg-slate-50 hover:bg-amber-50/50 hover:border-amber-500 transition-all cursor-pointer group relative">
-                    <div class="text-2xl group-hover:rotate-12 transition-transform">💰</div>
-                    <div class="text-xs font-black text-slate-500 mt-2 truncate">Platinum Core</div>
-                    <span class="text-[9px] bg-amber-100 text-amber-700 font-extrabold px-1.5 py-0.5 rounded uppercase tracking-wider block mt-1 w-max">LOCKED</span>
-                </button>
+            <div id="avatars-grid-container" class="grid grid-cols-2 sm:grid-cols-5 gap-3">
+                <!-- Injected via JavaScript Loop Dynamically to guarantee 25 perfect nodes -->
             </div>
         </div>
 
-        <!-- STEP 4: SUBSCRIPTION OPTIONS UPSELL -->
-        <div id="wizard-step-4" class="hidden w-full max-w-md bg-white border border-slate-200 rounded-3xl p-8 shadow-2xl text-center">
-            <div class="w-14 h-14 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center text-2xl mx-auto mb-4 font-black">⭐</div>
-            <h4 class="text-2xl font-black text-slate-900 uppercase tracking-tight">Update Subscription</h4>
-            <p class="text-sm text-slate-500 mt-1">Acquire unlimited tracks pipeline and studio expansion licenses.</p>
-            
-            <div class="mt-6 flex flex-col gap-3">
-                <button onclick="routeToAgeMatrix(true)" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 rounded-xl shadow-md transition-all cursor-pointer">
-                    Upgrade Account Now
-                </button>
-                <button onclick="routeToAgeMatrix(false)" class="w-full bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold py-3 rounded-xl transition-all cursor-pointer">
-                    Not Now
-                </button>
-            </div>
-        </div>
-
-        <!-- STEP 5: AGE TRACKING INPUT MATRIX (DD/MM/YY) -->
-        <div id="wizard-step-5" class="hidden w-full max-w-md bg-white border border-slate-200 rounded-3xl p-6 md:p-8 shadow-2xl">
-            <h4 class="text-2xl font-black text-slate-900 uppercase tracking-tight">What is your Age?</h4>
-            <p class="text-sm text-slate-500 mt-1">Provide date structural details for matrix initialization verification.</p>
-            
-            <div class="mt-6 grid grid-cols-3 gap-3">
-                <div>
-                    <label class="block text-[10px] font-bold text-slate-400 uppercase mb-1">Day (DD)</label>
-                    <input type="text" id="age-dd" maxlength="2" placeholder="16" oninput="autoShiftFocus(this, 'age-mm')" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-3 text-center text-slate-900 font-mono font-bold focus:outline-none focus:border-blue-600 text-lg">
-                </div>
-                <div>
-                    <label class="block text-[10px] font-bold text-slate-400 uppercase mb-1">Month (MM)</label>
-                    <input type="text" id="age-mm" maxlength="2" placeholder="06" oninput="autoShiftFocus(this, 'age-yy')" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-3 text-center text-slate-900 font-mono font-bold focus:outline-none focus:border-blue-600 text-lg">
-                </div>
-                <div>
-                    <label class="block text-[10px] font-bold text-slate-400 uppercase mb-1">Year (YY)</label>
-                    <input type="text" id="age-yy" maxlength="2" placeholder="26" oninput="validateAgeInputFields()" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-3 text-center text-slate-900 font-mono font-bold focus:outline-none focus:border-blue-600 text-lg">
-                </div>
-            </div>
-            <p id="age-error" class="hidden text-xs font-semibold text-red-600 mt-2">Data arrays incomplete. Please provide real structural coordinates.</p>
-            
-            <button onclick="routeToGenderMatrix()" class="w-full mt-6 bg-slate-900 hover:bg-black text-white font-bold py-3.5 rounded-xl transition-all cursor-pointer">
-                Continue Configuration
-            </button>
-        </div>
-
-        <!-- STEP 6: DYNAMIC GENDER TRACKING SELECTOR -->
-        <div id="wizard-step-6" class="hidden w-full max-w-md bg-white border border-slate-200 rounded-3xl p-6 md:p-8 shadow-2xl">
+        <!-- STEP 4: FAST WORKING GENDER MATRIX PANEL -->
+        <div id="wizard-step-4" class="hidden w-full max-w-md bg-white border border-slate-200 rounded-3xl p-6 md:p-8 shadow-2xl">
             <h4 class="text-2xl font-black text-slate-900 uppercase tracking-tight">Select Identity Gender</h4>
-            <p class="text-sm text-slate-500 mt-1">Specify profile architecture parameter states below.</p>
+            <p class="text-sm text-slate-500 mt-1">Specify profile architecture parameter states below instantly.</p>
             
             <div class="mt-6 space-y-3">
                 <button onclick="setProfileGender('Male')" id="gender-male" class="w-full text-left p-4 border border-slate-200 rounded-xl font-bold text-slate-800 bg-slate-50 hover:border-blue-500 transition-all cursor-pointer flex justify-between items-center">
@@ -506,23 +401,64 @@
                 </div>
             </div>
             
-            <button onclick="routeToObjectiveMatrix()" class="w-full mt-6 bg-slate-900 hover:bg-black text-white font-bold py-3.5 rounded-xl transition-all cursor-pointer">
+            <button onclick="routeToAgeMatrixPanel()" class="w-full mt-6 bg-slate-900 hover:bg-black text-white font-bold py-3.5 rounded-xl transition-all cursor-pointer">
                 Continue Setup
             </button>
         </div>
 
-        <!-- STEP 7: OPTIONAL USAGE ENGINE QUESTIONS -->
-        <div id="wizard-step-7" class="hidden w-full max-w-md bg-white border border-slate-200 rounded-3xl p-6 md:p-8 shadow-2xl">
-            <h4 class="text-2xl font-black text-slate-900 uppercase tracking-tight">Why you use?</h4>
-            <p class="text-sm text-slate-500 mt-1">Optional parameter query for service optimization telemetry logs.</p>
+        <!-- STEP 5: FAST WORKING AGE MATRIX WITH INSTANT CRITICAL BLOCK ACTION -->
+        <div id="wizard-step-5" class="hidden w-full max-w-md bg-white border border-slate-200 rounded-3xl p-6 md:p-8 shadow-2xl">
+            <h4 class="text-2xl font-black text-slate-900 uppercase tracking-tight">What is your Age?</h4>
+            <p class="text-sm text-slate-500 mt-1">Provide age value details. Requirements: Must be 10 years or older.</p>
             
             <div class="mt-6">
-                <textarea id="usage-objective" rows="3" placeholder="e.g. Building application interfaces, listening to premium mix tracks, etc." class="w-full bg-slate-50 border border-slate-200 rounded-xl p-4 text-slate-900 font-medium text-sm focus:outline-none focus:border-blue-600 resize-none"></textarea>
+                <label class="block text-xs font-bold text-slate-400 uppercase mb-1">Enter Numerical Age</label>
+                <input type="number" id="input-numerical-age" placeholder="e.g. 18" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-slate-900 font-mono font-bold focus:outline-none focus:border-blue-600 text-xl">
             </div>
+            <p id="age-error" class="hidden text-xs font-semibold text-red-600 mt-2">Please enter a valid age parameter to proceed.</p>
             
-            <button onclick="finalizeSignInDeployment()" class="w-full mt-6 bg-blue-600 hover:bg-blue-700 text-white font-bold py-3.5 rounded-xl shadow-lg transition-all cursor-pointer uppercase tracking-wider text-sm">
-                Complete Cloud Compilation
+            <button onclick="evaluateAgeGateSecurity()" class="w-full mt-6 bg-slate-900 hover:bg-black text-white font-bold py-3.5 rounded-xl transition-all cursor-pointer">
+                Verify Age Coordinates
             </button>
+        </div>
+
+        <!-- STEP 6: MOOD MATRIX SELECTOR (RAPS, SONGS, SWEET, ACTION) -->
+        <div id="wizard-step-6" class="hidden w-full max-w-md bg-white border border-slate-200 rounded-3xl p-6 md:p-8 shadow-2xl">
+            <h4 class="text-2xl font-black text-slate-900 uppercase tracking-tight">What is your Mood?</h4>
+            <p class="text-sm text-slate-500 mt-1">Tailor application environment nodes to your emotional soundscape.</p>
+            
+            <div class="mt-6 grid grid-cols-2 gap-3">
+                <button onclick="selectProfileMood('Raps')" class="p-4 bg-slate-50 border border-slate-200 hover:border-blue-600 rounded-2xl flex flex-col items-center justify-center gap-2 transition-all cursor-pointer font-black text-slate-800">
+                    <span class="text-3xl">🎤</span> <span>RAPS</span>
+                </button>
+                <button onclick="selectProfileMood('Songs')" class="p-4 bg-slate-50 border border-slate-200 hover:border-blue-600 rounded-2xl flex flex-col items-center justify-center gap-2 transition-all cursor-pointer font-black text-slate-800">
+                    <span class="text-3xl">🎵</span> <span>SONGS</span>
+                </button>
+                <button onclick="selectProfileMood('Sweet')" class="p-4 bg-slate-50 border border-slate-200 hover:border-blue-600 rounded-2xl flex flex-col items-center justify-center gap-2 transition-all cursor-pointer font-black text-slate-800">
+                    <span class="text-3xl">🍬</span> <span>SWEET</span>
+                </button>
+                <button onclick="selectProfileMood('Action')" class="p-4 bg-slate-50 border border-slate-200 hover:border-blue-600 rounded-2xl flex flex-col items-center justify-center gap-2 transition-all cursor-pointer font-black text-slate-800">
+                    <span class="text-3xl">🎬</span> <span>ACTION</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- STEP 7: DYNAMIC 10-SECONDS CIRCULAR COUNTDOWN TIMER INDICATOR -->
+        <div id="wizard-step-7" class="hidden w-full max-w-md bg-white border border-slate-200 rounded-3xl p-8 shadow-2xl text-center flex flex-col items-center justify-center">
+            
+            <!-- SVG Circle Animation Box -->
+            <div class="relative w-32 h-32 mb-4">
+                <svg class="w-full h-full circle-svg-loader" viewBox="0 0 100 100">
+                    <circle class="circle-svg-bg" cx="50" cy="50" r="40" stroke-width="8" />
+                    <circle id="svg-progress-bar" class="circle-svg-progress" cx="50" cy="50" r="40" stroke-width="8" stroke-dasharray="251.2" stroke-dashoffset="251.2" />
+                </svg>
+                <div id="circle-text-counter" class="absolute inset-0 flex items-center justify-center font-mono text-2xl font-black text-slate-900">
+                    10s
+                </div>
+            </div>
+
+            <h4 class="text-xl font-black text-slate-900 uppercase tracking-tight">Compiling User Ecosystem</h4>
+            <p class="text-sm text-slate-500 mt-1">Finalizing structural asset alignments. Almost there...</p>
         </div>
 
     </div>
@@ -530,10 +466,51 @@
     <!-- ================= JAVASCRIPT LOGIC CONTROLS ENGINE ================= -->
     <script>
         // System Core State Trees
+        let selectedAuthMethodType = "";
         let chosenAvatarIdentity = "🧔 Malik Khan";
-        let chosenSubTier = "STANDARD NODE";
         let chosenGenderVal = "Not Specified";
+        let chosenMoodVal = "Raps";
         let isDarkMode = false;
+
+        // Raw Array Matrix Containing Exactly 25 Free Unique Avatars
+        const globalAvatarsPool = [
+            { icon: "🧔", name: "Malik Khan" }, { icon: "👨‍💻", name: "Nafay Dev" },
+            { icon: "🎤", name: "Rap Master" }, { icon: "🎧", name: "Audio Eng" },
+            { icon: "😎", name: "Beat Genius" }, { icon: "🥷", name: "Sound Shadow" },
+            { icon: "🔥", name: "Rhyme King" }, { icon: "⚡", name: "Cyber Agent" },
+            { icon: "🚀", name: "Studio Lead" }, { icon: "💎", name: "Lyric Ace" },
+            { icon: "👑", name: "Eleven Elite" }, { icon: "🪐", name: "Cosmic Flow" },
+            { icon: "✨", name: "Aura Special" }, { icon: "🔮", name: "Synth Mage" },
+            { icon: "🦁", name: "Pack Lead" }, { icon: "🧬", name: "Matrix Node" },
+            { icon: "🏆", name: "Grand Champ" }, { icon: "🎖️", name: "Major Sound" },
+            { icon: "🎭", name: "Flow Phantom" }, { icon: "💰", name: "Platinum King" },
+            { icon: "💥", name: "Bass Blast" }, { icon: "🎹", name: "Key Maestro" },
+            { icon: "🌟", name: "Super Star" }, { icon: "🤺", name: "Action Edge" },
+            { icon: "📡", name: "Signal Lord" }
+        ];
+
+        // Self-Executing Dynamic Generation of 25 Avatar Elements to Ensure 100% Runtime Compliance
+        function initializeAvatarsGrid() {
+            const container = document.getElementById('avatars-grid-container');
+            container.innerHTML = ""; // Clear
+            
+            globalAvatarsPool.forEach(item => {
+                const btn = document.createElement('button');
+                btn.type = "button";
+                btn.className = "p-2.5 border border-slate-200 rounded-xl text-left hover:border-blue-500 hover:bg-blue-50/20 transition-all cursor-pointer group";
+                btn.onclick = () => selectWizardAvatar(`${item.icon} ${item.name}`);
+                
+                btn.innerHTML = `
+                    <div class="text-2xl group-hover:scale-110 transition-transform">${item.icon}</div>
+                    <div class="text-[11px] font-black text-slate-800 mt-1 truncate">${item.name}</div>
+                    <span class="text-[8px] bg-green-100 text-green-700 font-extrabold px-1 py-0.2 rounded uppercase block mt-0.5 w-max">FREE</span>
+                `;
+                container.appendChild(btn);
+            });
+        }
+
+        // Run Avatar Grid Initialization Instantly
+        initializeAvatarsGrid();
 
         // Settings Dropdown Controller
         function toggleSettingsMenu() {
@@ -541,20 +518,17 @@
             menu.classList.toggle('hidden');
         }
 
-        // Generic Event Actions Handler
         function handleMenuAction(message) {
             alert(message);
             document.getElementById('settings-menu').classList.add('hidden');
         }
 
-        // Clip-board Data Action 
         function copyWebsiteLink() {
             navigator.clipboard.writeText(window.location.href);
             alert("Success: Eleven Pro Raps environment link saved to local clipboard arrays.");
             document.getElementById('settings-menu').classList.add('hidden');
         }
 
-        // Theme Toggle Controller (Light / Dark Mode Routing)
         function toggleTheme() {
             isDarkMode = !isDarkMode;
             const body = document.getElementById('app-body');
@@ -572,10 +546,11 @@
             document.getElementById('settings-menu').classList.add('hidden');
         }
 
-        // Wizard Structural Navigation Methods
+        // Wizard Structural Open/Close Routers
         function openSignInWizard() {
             document.getElementById('signin-modal').classList.remove('hidden');
             hideAllWizardPanels();
+            document.getElementById('method-input-zone').classList.add('hidden');
             document.getElementById('wizard-step-1').classList.remove('hidden');
         }
 
@@ -589,87 +564,81 @@
             }
         }
 
-        // Stage 1 -> Stage 2: 5-7 Seconds Live Scanner Logic
-        function triggerGmailScanner() {
-            const emailValue = document.getElementById('user-email').value;
-            const errorLabel = document.getElementById('email-error');
+        // Step 1 Custom Option Routing Logic
+        function selectAuthMethod(methodType) {
+            selectedAuthMethodType = methodType;
+            document.getElementById('method-error').classList.add('hidden');
             
-            if (emailValue.toLowerCase().endsWith('@gmail.com') && emailValue.length > 10) {
-                errorLabel.classList.add('hidden');
-                document.getElementById('wizard-step-1').classList.add('hidden');
-                document.getElementById('wizard-step-2').classList.remove('hidden');
-                
-                // Fast Engine Loop Calculation (Takes exactly 5 to 7 seconds)
-                const processingSeconds = Math.floor(Math.random() * 3) + 5; 
-                let exactCycleCounter = 0;
-                const timerLog = document.getElementById('live-countdown-timer');
-                
-                timerLog.innerText = `Connecting security lines... [0/${processingSeconds}s]`;
-                
-                const backgroundScanner = setInterval(() => {
-                    exactCycleCounter++;
-                    timerLog.innerText = `Verifying digital identities... [${exactCycleCounter}/${processingSeconds}s]`;
-                    
-                    if (exactCycleCounter >= processingSeconds) {
-                        clearInterval(backgroundScanner);
-                        // Jump fast to avatar distribution panel
-                        document.getElementById('wizard-step-2').classList.add('hidden');
-                        document.getElementById('wizard-step-3').classList.remove('hidden');
-                    }
-                }, 1000);
-                
-            } else {
-                errorLabel.classList.remove('hidden');
+            const inputZone = document.getElementById('method-input-zone');
+            const gmailWrap = document.getElementById('gmail-field-wrap');
+            const phoneWrap = document.getElementById('phone-field-wrap');
+            
+            inputZone.classList.remove('hidden');
+            gmailWrap.classList.add('hidden');
+            phoneWrap.classList.add('hidden');
+            
+            if (methodType === 'Gmail') {
+                gmailWrap.classList.remove('hidden');
+            } else if (methodType === 'Phone') {
+                phoneWrap.classList.remove('hidden');
+            } else if (methodType === 'Guest') {
+                // Guest mode directly skips sub-inputs safely
+                triggerVerificationScanner();
             }
         }
 
-        // Stage 3 -> Stage 4: Extraction & Subscription Route
+        // Step 1 -> Step 2: High Reliability 10-15 Seconds Waiting Scanner Loop Engine
+        function triggerVerificationScanner() {
+            const errorLabel = document.getElementById('method-error');
+            
+            // Context Input Field Allocations Validations Checks
+            if (selectedAuthMethodType === 'Gmail') {
+                const val = document.getElementById('input-gmail-node').value;
+                if (!val.toLowerCase().endsWith('@gmail.com') || val.length < 11) {
+                    errorLabel.classList.remove('hidden');
+                    return;
+                }
+            } else if (selectedAuthMethodType === 'Phone') {
+                const val = document.getElementById('input-phone-node').value;
+                if (val.trim().length < 7) {
+                    errorLabel.classList.remove('hidden');
+                    return;
+                }
+            }
+
+            errorLabel.classList.add('hidden');
+            document.getElementById('wizard-step-1').classList.add('hidden');
+            document.getElementById('wizard-step-2').classList.remove('hidden');
+            
+            // Absolute Enforcement: Math Calculation Constraints standard ranges between 10 to 15 Seconds
+            const processingSeconds = Math.floor(Math.random() * 6) + 10; 
+            let exactCycleCounter = 0;
+            const timerLog = document.getElementById('live-countdown-timer');
+            
+            timerLog.innerText = `Connecting secure lines... [0/${processingSeconds}s]`;
+            
+            const backgroundScanner = setInterval(() => {
+                exactCycleCounter++;
+                timerLog.innerText = `Syncing cloud server matrices... [${exactCycleCounter}/${processingSeconds}s]`;
+                
+                if (exactCycleCounter >= processingSeconds) {
+                    clearInterval(backgroundScanner);
+                    // Jump to 25 Free Avatars Grid selection window
+                    document.getElementById('wizard-step-2').classList.add('hidden');
+                    document.getElementById('wizard-step-3').classList.remove('hidden');
+                }
+            }, 1000);
+        }
+
+        // Step 3 -> Step 4 Router Allocation Action
         function selectWizardAvatar(avatarString) {
             chosenAvatarIdentity = avatarString;
             document.getElementById('wizard-step-3').classList.add('hidden');
             document.getElementById('wizard-step-4').classList.remove('hidden');
         }
 
-        // Stage 4 -> Stage 5: Premium State Tracking & Age Entry
-        function routeToAgeMatrix(isPremium) {
-            chosenSubTier = isPremium ? "PRO LAB ACCOUNT" : "STANDARD NODE";
-            document.getElementById('wizard-step-4').classList.add('hidden');
-            document.getElementById('wizard-step-5').classList.remove('hidden');
-        }
-
-        // Fast Auto-shift Inputs Focus Logic Tracker
-        function autoShiftFocus(currentField, targetFieldId) {
-            if (currentField.value.length >= currentField.maxLength) {
-                document.getElementById(targetFieldId).focus();
-            }
-            validateAgeInputFields();
-        }
-
-        function validateAgeInputFields() {
-            const dd = document.getElementById('age-dd').value;
-            const mm = document.getElementById('age-mm').value;
-            const yy = document.getElementById('age-yy').value;
-            
-            if (dd.length === 2 && mm.length === 2 && yy.length === 2) {
-                document.getElementById('age-error').classList.add('hidden');
-                return true;
-            }
-            return false;
-        }
-
-        // Stage 5 -> Stage 6: Gender Allocation Matrix Routing
-        function routeToGenderMatrix() {
-            if (validateAgeInputFields()) {
-                document.getElementById('wizard-step-5').classList.add('hidden');
-                document.getElementById('wizard-step-6').classList.remove('hidden');
-            } else {
-                document.getElementById('age-error').classList.remove('hidden');
-            }
-        }
-
-        // Gender Choice State Manager
+        // Gender Choice State Fast Updates Manager
         function setProfileGender(genderType) {
-            // Reset state UI selections
             document.getElementById('gender-male').classList.remove('border-blue-600', 'bg-blue-50/30');
             document.getElementById('gender-female').classList.remove('border-blue-600', 'bg-blue-50/30');
             
@@ -684,25 +653,83 @@
             }
         }
 
-        // Stage 6 -> Stage 7: Strategy Question Routing
-        function routeToObjectiveMatrix() {
-            document.getElementById('wizard-step-6').classList.add('hidden');
-            document.getElementById('wizard-step-7').classList.remove('hidden');
+        // Step 4 -> Step 5 Fast Routing
+        function routeToAgeMatrixPanel() {
+            document.getElementById('wizard-step-4').classList.add('hidden');
+            document.getElementById('wizard-step-5').classList.remove('hidden');
         }
 
-        // Final Element Extraction, Replacement and Core Deployment Closure
+        // Step 5 Age Assessment Action Gate Enforcements (Instant Block Action If under 10)
+        function evaluateAgeGateSecurity() {
+            const ageInput = document.getElementById('input-numerical-age').value;
+            const ageError = document.getElementById('age-error');
+            
+            if (!ageInput || isNaN(ageInput)) {
+                ageError.classList.remove('hidden');
+                return;
+            }
+            
+            ageError.classList.add('hidden');
+            const exactAgeInt = parseInt(ageInput, 10);
+            
+            if (exactAgeInt < 10) {
+                // SECURITY ENFORCEMENT VECTORS: CRASH CORE DOM INTERFACES IMMEDIATELY
+                document.getElementById('signin-modal').classList.add('hidden');
+                document.getElementById('app-body').innerHTML = ""; // Wipe everything out completely
+                document.getElementById('app-termination-block').classList.remove('hidden'); // Force replacement frame
+                return;
+            }
+            
+            // If secure parameters passed, proceed seamlessly to mood selector matrix
+            document.getElementById('wizard-step-5').classList.add('hidden');
+            document.getElementById('wizard-step-6').classList.remove('hidden');
+        }
+
+        // Step 6 -> Step 7 Mood Selector Triggering a Real 10-Second Circular Progress Tracker
+        function selectProfileMood(moodString) {
+            chosenMoodVal = moodString;
+            document.getElementById('wizard-step-6').classList.add('hidden');
+            document.getElementById('wizard-step-7').classList.remove('hidden');
+            
+            // Initialize 10-Second Accurate Countdown Mechanics
+            let targetCountdownValue = 10;
+            const textCounter = document.getElementById('circle-text-counter');
+            const svgProgressBar = document.getElementById('svg-progress-bar');
+            
+            // Total circumference boundary parameters value = 2 * Math.PI * r (2 * 3.14159 * 40 = 251.2)
+            const strokeCircumference = 251.2;
+            
+            textCounter.innerText = `${targetCountdownValue}s`;
+            svgProgressBar.style.strokeDashoffset = strokeCircumference;
+
+            const finalProcessingEngine = setInterval(() => {
+                targetCountdownValue--;
+                textCounter.innerText = `${targetCountdownValue}s`;
+                
+                // Track percentage changes to offset the path lengths
+                const completionPercentage = (10 - targetCountdownValue) / 10;
+                const dynamicOffset = strokeCircumference - (strokeCircumference * completionPercentage);
+                svgProgressBar.style.strokeDashoffset = dynamicOffset;
+                
+                if (targetCountdownValue <= 0) {
+                    clearInterval(finalProcessingEngine);
+                    finalizeSignInDeployment();
+                }
+            }, 1000);
+        }
+
+        // Final Dynamic Compilation Execution Closure
         function finalizeSignInDeployment() {
             const authContainer = document.getElementById('auth-zone');
             const iconSymbol = chosenAvatarIdentity.split(' ')[0];
             const cleanNameLabel = chosenAvatarIdentity.split(' ').slice(1).join(' ');
             
-            // Rebuild structural layout blocks cleanly, removing input triggers
             authContainer.innerHTML = `
                 <div class="flex items-center gap-3 bg-slate-50 border border-slate-200 px-4 py-1.5 rounded-2xl dark:bg-slate-800 dark:border-slate-700 shadow-sm">
                     <span class="text-xl">${iconSymbol}</span>
                     <div class="text-left">
                         <p class="text-xs font-black text-slate-900 dark:text-white leading-none">${cleanNameLabel}</p>
-                        <p class="text-[9px] font-black ${chosenSubTier === 'PRO LAB ACCOUNT' ? 'text-amber-500' : 'text-slate-400'} tracking-wider uppercase mt-1">${chosenSubTier}</p>
+                        <p class="text-[9px] font-black text-blue-600 tracking-wider uppercase mt-1">${chosenMoodVal} MODE</p>
                     </div>
                 </div>
             `;
@@ -710,7 +737,7 @@
             closeSignInWizard();
         }
 
-        // Clear Identity Configurations on Request
+        // Reset Auth state 
         function triggerLogout() {
             const authContainer = document.getElementById('auth-zone');
             authContainer.innerHTML = `
@@ -722,7 +749,7 @@
             alert("System Event: Credentials cleared from current running thread pools.");
         }
 
-        // Independent Privacy Isolation Context Tab Launcher
+        // Independent Privacy Window Tab
         function launchPrivacyTab() {
             const legalWindow = window.open('', '_blank');
             legalWindow.document.write(`
@@ -732,12 +759,6 @@
                     <meta charset="UTF-8">
                     <title>Privacy Policy & Terms - Eleven Pro Raps</title>
                     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"><\/script>
-                    <style>
-                        .hover-glow-card { transition: all 0.3s ease; }
-                        .hover-glow-card:hover { transform: translateY(-2px); box-shadow: 0 12px 30px rgba(37, 99, 235, 0.30); border-color: rgba(37, 99, 235, 0.4); }
-                        .hover-glow-warning { transition: all 0.3s ease; }
-                        .hover-glow-warning:hover { transform: translateY(-2px); box-shadow: 0 12px 30px rgba(220, 38, 38, 0.30); border-color: rgba(220, 38, 38, 0.4); }
-                    <\/style>
                 </head>
                 <body class="bg-white text-slate-900 font-sans antialiased p-6 md:p-12 max-w-4xl mx-auto space-y-8">
                     <header class="border-b border-slate-200 pb-6">
@@ -745,19 +766,10 @@
                         <p class="text-sm text-slate-500 mt-2">Effective Date: June 16, 2026 • Jurisdiction: Punjab, Pakistan</p>
                     </header>
                     <main class="space-y-6">
-                        <p class="text-slate-600">Welcome to <strong>Eleven Pro Raps</strong>. Your privacy and digital assets security are important to us. This document governs your access to all modules provided by <strong>Nafay Develops Labs</strong>.</p>
-                        
-                        <div class="hover-glow-card bg-slate-50 border border-slate-200 p-6 rounded-xl">
-                            <h3 class="text-xl font-bold mb-2">1. Information Collection and Use</h3>
-                            <p class="text-slate-600">We respect user privacy configurations. Analytics track loops and system entry inputs are processed strictly to personalize running session dashboard variables.</p>
-                        </div>
-
-                        <div class="hover-glow-warning bg-slate-50 border-2 border-red-200 p-6 rounded-xl">
-                            <h3 class="text-xl font-bold text-red-600 mb-2">2. Strict Cyber Anti-Hacking Sanctions</h3>
-                            <p class="text-slate-700 font-bold mb-1">⚠️ Security Threat Penalties Matrix</p>
-                            <p class="text-slate-600 mb-2">Any unauthorized intent to exploit, injection scanning, or code manipulation targets running on Eleven Pro Raps systems will trigger structural financial penalty tracking vectors.</p>
-                            <div class="bg-white p-3 border-l-4 border-red-600 font-mono text-sm font-bold text-slate-900 my-2">Contractual Penalties Assessment: $9,999 USD.</div>
-                            <p class="text-xs text-slate-400">All events are monitored securely under terms authorized within the Prevention of Electronic Crimes Act (PECA) guidelines of Punjab, Pakistan.</p>
+                        <p class="text-slate-600">Welcome to <strong>Eleven Pro Raps</strong>. Secure application access provisions governed by <strong>Nafay Develops Labs</strong>.</p>
+                        <div class="bg-slate-50 border border-slate-200 p-6 rounded-xl">
+                            <h3 class="text-xl font-bold mb-2">1. Age Restrictive Protocols</h3>
+                            <p class="text-slate-600">This application actively deploys real-time security checking gates. Nodes accessing resources under the age of 10 are restricted from processing terminal data configurations.</p>
                         </div>
                     </main>
                 </body>
