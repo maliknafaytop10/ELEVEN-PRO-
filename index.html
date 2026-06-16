@@ -7,35 +7,32 @@
     <!-- Tailwind CSS v4 -->
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <style>
-        /* Interactive 3D Tilt & Light Glow Effects */
+        /* Smooth, Professional Interactive Glow & Tilt Effects */
         .hover-glow-card {
-            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
         }
         .hover-glow-card:hover {
-            transform: rotate(-3deg) translateY(-4px);
-            box-shadow: 0 20px 40px rgba(37, 99, 235, 0.30); /* 30% Blue Glow */
-            border-color: rgba(37, 99, 235, 0.5);
+            transform: translateY(-2px);
+            box-shadow: 0 12px 30px rgba(37, 99, 235, 0.30); /* Precise 30% Blue Glow */
+            border-color: rgba(37, 99, 235, 0.4);
         }
         
         .hover-glow-warning {
-            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
         }
         .hover-glow-warning:hover {
-            transform: rotate(-3deg) translateY(-4px);
-            box-shadow: 0 20px 40px rgba(220, 38, 38, 0.30); /* 30% Red Glow */
-            border-color: rgba(220, 38, 38, 0.5);
+            transform: translateY(-2px);
+            box-shadow: 0 12px 30px rgba(220, 38, 38, 0.30); /* Precise 30% Red Glow */
+            border-color: rgba(220, 38, 38, 0.4);
         }
 
-        /* 100x Continuous Fast Moving Logo Animation */
-        @keyframes fastLogoMove {
-            0% { transform: translateX(0px) rotate(0deg); }
-            25% { transform: translateX(15px) rotate(3deg); }
-            50% { transform: translateX(-15px) rotate(-3deg); }
-            75% { transform: translateX(10px) rotate(2deg); }
-            100% { transform: translateX(0px) rotate(0deg); }
+        /* Calmed Down, Smooth & Professional Premium Logo Animation */
+        @keyframes professionalPulse {
+            0%, 100% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.03); opacity: 0.95; }
         }
         .moving-logo {
-            animation: fastLogoMove 0.8s linear infinite;
+            animation: professionalPulse 2.5s ease-in-out infinite;
         }
     </style>
 </head>
@@ -50,7 +47,7 @@
             
             <!-- Logo & Brand Details -->
             <div class="flex items-center gap-3">
-                <div class="moving-logo bg-blue-600 text-white font-black text-xl px-4 py-2 rounded-xl shadow-lg shadow-blue-500/20 tracking-wider">
+                <div class="moving-logo bg-blue-600 text-white font-black text-lg px-4 py-2 rounded-xl shadow-md shadow-blue-500/10 tracking-wider">
                     E11R
                 </div>
                 <div>
@@ -63,7 +60,7 @@
             <div class="flex items-center gap-4">
                 <!-- Working State Control Container -->
                 <div id="auth-zone">
-                    <button onclick="openSignInModal()" class="bg-blue-600 hover:bg-blue-700 text-white text-sm font-bold px-6 py-2.5 rounded-xl shadow-sm transition-all duration-200 transform active:scale-95 cursor-pointer">
+                    <button onclick="openSignInWizard()" class="bg-blue-600 hover:bg-blue-700 text-white text-sm font-bold px-6 py-2.5 rounded-xl shadow-sm transition-all duration-200 transform active:scale-95 cursor-pointer">
                         Sign In
                     </button>
                 </div>
@@ -105,9 +102,9 @@
     </header>
 
     <!-- HERO INTRODUCTION HERO -->
-    <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-12 text-center">
+    <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-16 text-center">
         <h2 class="text-5xl md:text-7xl font-black uppercase tracking-tight text-slate-900 dark:text-white">
-            V2 OF RAPS
+            ELEVEN PRO RAPS
         </h2>
         <p class="mt-4 text-xl md:text-2xl font-bold text-slate-500 max-w-2xl mx-auto dark:text-slate-400">
             The Eleven Ultimate Website By Your Own <span class="text-blue-600">Nafay</span>
@@ -267,7 +264,6 @@
                     <div class="p-3 bg-blue-50 text-blue-600 rounded-xl dark:bg-blue-950/50 dark:text-blue-400">⚡</div>
                     <div>
                         <h4 class="text-xl font-bold text-slate-900 dark:text-white">Person AI Assistant</h4>
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z" />
                         <p class="text-slate-500 text-sm mt-1 dark:text-slate-400">Deploy primary cognitive models directly through verified deployment connections.</p>
                     </div>
                 </div>
@@ -305,14 +301,14 @@
     </footer>
 
 
-    <!-- ================= AUTHENTICATION MODAL ENGINE ================= -->
-    <div id="signin-modal" class="hidden fixed inset-0 bg-black/60 backdrop-blur-md z-50 flex items-center justify-center p-4">
+    <!-- ================= MODERNIZED HIGH-PERFORMANCE SIGN IN WIZARD ================= -->
+    <div id="signin-modal" class="hidden fixed inset-0 bg-slate-950/80 backdrop-blur-md z-50 flex items-center justify-center p-4">
         
-        <!-- Step 1: Input Matrix -->
-        <div id="modal-step-1" class="w-full max-w-md bg-white border border-slate-200 rounded-3xl p-6 md:p-8 shadow-2xl relative">
-            <button onclick="closeSignInModal()" class="absolute top-4 right-4 text-slate-400 hover:text-slate-600 font-bold text-xl cursor-pointer">&times;</button>
-            <h4 class="text-2xl font-black text-slate-900 tracking-tight">Access Lab Privileges</h4>
-            <p class="text-sm text-slate-500 mt-1">Get more experience with sign up than a standard profile layout.</p>
+        <!-- STEP 1: GMAIL ENTRY PANEL -->
+        <div id="wizard-step-1" class="w-full max-w-md bg-white border border-slate-200 rounded-3xl p-6 md:p-8 shadow-2xl relative">
+            <button onclick="closeSignInWizard()" class="absolute top-4 right-4 text-slate-400 hover:text-slate-600 font-bold text-xl cursor-pointer">&times;</button>
+            <h4 class="text-2xl font-black text-slate-900 tracking-tight uppercase">Access Lab Privileges</h4>
+            <p class="text-sm text-slate-500 mt-1">Initialize authentication connection array.</p>
             
             <div class="mt-6 space-y-4">
                 <div>
@@ -320,102 +316,223 @@
                     <input type="email" id="user-email" placeholder="username@gmail.com" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-slate-900 font-medium focus:outline-none focus:border-blue-600 text-sm">
                     <p id="email-error" class="hidden text-xs font-semibold text-red-600 mt-1">Input configuration mismatch. Requires matching valid "@gmail.com" identity.</p>
                 </div>
-                <button onclick="processGmailValidation()" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3.5 rounded-xl shadow-lg transition-all cursor-pointer">
+                <button onclick="triggerGmailScanner()" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3.5 rounded-xl shadow-md transition-all cursor-pointer">
                     Verify Account
                 </button>
             </div>
         </div>
 
-        <!-- Step 2: Scanner Simulation Engine -->
-        <div id="modal-step-2" class="hidden w-full max-w-md bg-white border border-slate-200 rounded-3xl p-8 shadow-2xl text-center">
-            <div class="w-16 h-16 border-4 border-blue-600 border-t-transparent rounded-full animate-spin mx-auto mb-6"></div>
-            <h4 class="text-xl font-black text-slate-900">Synchronizing Identity</h4>
-            <p class="text-sm text-slate-500 mt-2">Scanner execution handling running securely. Taking 2-5 standard cycles...</p>
-            <div class="mt-4 bg-slate-50 border border-slate-200 rounded-xl p-3 font-mono text-xs text-slate-500" id="scanner-timer">
-                Awaiting connection verification...
+        <!-- STEP 2: STABILIZED 5-7 SECONDS TIME ENGINE SCANNER -->
+        <div id="wizard-step-2" class="hidden w-full max-w-md bg-white border border-slate-200 rounded-3xl p-8 shadow-2xl text-center">
+            <div class="w-14 h-14 border-4 border-blue-600 border-t-transparent rounded-full animate-spin mx-auto mb-6"></div>
+            <h4 class="text-xl font-black text-slate-900 uppercase tracking-tight">Synchronizing Node Security</h4>
+            <p class="text-sm text-slate-500 mt-2">Running rigorous secure socket scans. Please wait 5-7 seconds...</p>
+            <div class="mt-5 bg-slate-50 border border-slate-200 rounded-xl p-3 font-mono text-xs text-blue-600 font-bold" id="live-countdown-timer">
+                Awaiting tracking sequence loop...
             </div>
         </div>
 
-        <!-- Step 3: Avatar Bios Selector Grid -->
-        <div id="modal-step-3" class="hidden w-full max-w-lg bg-white border border-slate-200 rounded-3xl p-6 md:p-8 shadow-2xl max-h-[85vh] overflow-y-auto">
-            <h4 class="text-2xl font-black text-slate-900">Select Professional Profile Avatar</h4>
-            <p class="text-sm text-slate-500 mt-1">Select real user bio profiles. 10 Free nodes active, 5 premium nodes locked.</p>
+        <!-- STEP 3: HIGH FIDELITY PREMIUM AVATAR MATRICES (20 AVATARS) -->
+        <div id="wizard-step-3" class="hidden w-full max-w-2xl bg-white border border-slate-200 rounded-3xl p-6 md:p-8 shadow-2xl max-h-[85vh] overflow-y-auto">
+            <div class="border-b border-slate-100 pb-4 mb-4">
+                <h4 class="text-2xl font-black text-slate-900 uppercase tracking-tight">Select Character Identity</h4>
+                <p class="text-sm text-slate-500 mt-1">10 Premium free nodes active, 10 advanced tracking nodes locked.</p>
+            </div>
             
-            <!-- Real Mans Bio Grid Layout -->
-            <div class="grid grid-cols-2 sm:grid-cols-3 gap-3 mt-6">
-                <!-- Free 1-10 -->
-                <button onclick="selectUserAvatar('👨‍💼 Dev Malik')" class="p-3 border border-slate-200 rounded-xl text-left hover:border-blue-500 bg-slate-50 cursor-pointer">
-                    <div class="text-2xl">👨‍💼</div><div class="text-xs font-bold text-slate-800 mt-1">Dev Malik</div><div class="text-[10px] text-green-600 font-bold">FREE</div>
+            <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
+                <!-- ================= 10 FREE ORIGINAL AVATARS ================= -->
+                <button onclick="selectWizardAvatar('🧔 Malik Khan')" class="p-3 border border-slate-200 rounded-xl text-left hover:border-blue-500 hover:bg-blue-50/20 transition-all cursor-pointer group">
+                    <div class="text-2xl group-hover:scale-110 transition-transform">🧔</div>
+                    <div class="text-xs font-black text-slate-800 mt-2 truncate">Malik Khan</div>
+                    <span class="text-[9px] bg-green-100 text-green-700 font-extrabold px-1.5 py-0.5 rounded uppercase tracking-wider block mt-1 w-max">FREE</span>
                 </button>
-                <button onclick="selectUserAvatar('👨‍🎤 Rap Artist')" class="p-3 border border-slate-200 rounded-xl text-left hover:border-blue-500 bg-slate-50 cursor-pointer">
-                    <div class="text-2xl">👨‍🎤</div><div class="text-xs font-bold text-slate-800 mt-1">Rap Artist</div><div class="text-[10px] text-green-600 font-bold">FREE</div>
+                <button onclick="selectWizardAvatar('👨‍💻 Nafay Dev')" class="p-3 border border-slate-200 rounded-xl text-left hover:border-blue-500 hover:bg-blue-50/20 transition-all cursor-pointer group">
+                    <div class="text-2xl group-hover:scale-110 transition-transform">👨‍💻</div>
+                    <div class="text-xs font-black text-slate-800 mt-2 truncate">Nafay Dev</div>
+                    <span class="text-[9px] bg-green-100 text-green-700 font-extrabold px-1.5 py-0.5 rounded uppercase tracking-wider block mt-1 w-max">FREE</span>
                 </button>
-                <button onclick="selectUserAvatar('👨‍💻 Nafay Lab Operator')" class="p-3 border border-slate-200 rounded-xl text-left hover:border-blue-500 bg-slate-50 cursor-pointer">
-                    <div class="text-2xl">👨‍💻</div><div class="text-xs font-bold text-slate-800 mt-1">Lab Operator</div><div class="text-[10px] text-green-600 font-bold">FREE</div>
+                <button onclick="selectWizardAvatar('🎤 Rap Master')" class="p-3 border border-slate-200 rounded-xl text-left hover:border-blue-500 hover:bg-blue-50/20 transition-all cursor-pointer group">
+                    <div class="text-2xl group-hover:scale-110 transition-transform">🎤</div>
+                    <div class="text-xs font-black text-slate-800 mt-2 truncate">Rap Master</div>
+                    <span class="text-[9px] bg-green-100 text-green-700 font-extrabold px-1.5 py-0.5 rounded uppercase tracking-wider block mt-1 w-max">FREE</span>
                 </button>
-                <button onclick="selectUserAvatar('👨‍🚀 Audio Engineer')" class="p-3 border border-slate-200 rounded-xl text-left hover:border-blue-500 bg-slate-50 cursor-pointer">
-                    <div class="text-2xl">👨‍🚀</div><div class="text-xs font-bold text-slate-800 mt-1">Audio Eng</div><div class="text-[10px] text-green-600 font-bold">FREE</div>
+                <button onclick="selectWizardAvatar('🎧 Audio Eng')" class="p-3 border border-slate-200 rounded-xl text-left hover:border-blue-500 hover:bg-blue-50/20 transition-all cursor-pointer group">
+                    <div class="text-2xl group-hover:scale-110 transition-transform">🎧</div>
+                    <div class="text-xs font-black text-slate-800 mt-2 truncate">Audio Eng</div>
+                    <span class="text-[9px] bg-green-100 text-green-700 font-extrabold px-1.5 py-0.5 rounded uppercase tracking-wider block mt-1 w-max">FREE</span>
                 </button>
-                <button onclick="selectUserAvatar('😎 Executive Producer')" class="p-3 border border-slate-200 rounded-xl text-left hover:border-blue-500 bg-slate-50 cursor-pointer">
-                    <div class="text-2xl">😎</div><div class="text-xs font-bold text-slate-800 mt-1">Producer</div><div class="text-[10px] text-green-600 font-bold">FREE</div>
+                <button onclick="selectWizardAvatar('😎 Beat Producer')" class="p-3 border border-slate-200 rounded-xl text-left hover:border-blue-500 hover:bg-blue-50/20 transition-all cursor-pointer group">
+                    <div class="text-2xl group-hover:scale-110 transition-transform">😎</div>
+                    <div class="text-xs font-black text-slate-800 mt-2 truncate">Beat Producer</div>
+                    <span class="text-[9px] bg-green-100 text-green-700 font-extrabold px-1.5 py-0.5 rounded uppercase tracking-wider block mt-1 w-max">FREE</span>
                 </button>
-                <button onclick="selectUserAvatar('🧔 Lead Vocalist')" class="p-3 border border-slate-200 rounded-xl text-left hover:border-blue-500 bg-slate-50 cursor-pointer">
-                    <div class="text-2xl">🧔</div><div class="text-xs font-bold text-slate-800 mt-1">Lead Vocal</div><div class="text-[10px] text-green-600 font-bold">FREE</div>
+                <button onclick="selectWizardAvatar('🥷 Sound Shadow')" class="p-3 border border-slate-200 rounded-xl text-left hover:border-blue-500 hover:bg-blue-50/20 transition-all cursor-pointer group">
+                    <div class="text-2xl group-hover:scale-110 transition-transform">🥷</div>
+                    <div class="text-xs font-black text-slate-800 mt-2 truncate">Sound Shadow</div>
+                    <span class="text-[9px] bg-green-100 text-green-700 font-extrabold px-1.5 py-0.5 rounded uppercase tracking-wider block mt-1 w-max">FREE</span>
                 </button>
-                <button onclick="selectUserAvatar('👨‍ Cyber Analyst')" class="p-3 border border-slate-200 rounded-xl text-left hover:border-blue-500 bg-slate-50 cursor-pointer">
-                    <div class="text-2xl">👨‍</div><div class="text-xs font-bold text-slate-800 mt-1">Cyber Analyst</div><div class="text-[10px] text-green-600 font-bold">FREE</div>
+                <button onclick="selectWizardAvatar('🔥 Rhyme King')" class="p-3 border border-slate-200 rounded-xl text-left hover:border-blue-500 hover:bg-blue-50/20 transition-all cursor-pointer group">
+                    <div class="text-2xl group-hover:scale-110 transition-transform">🔥</div>
+                    <div class="text-xs font-black text-slate-800 mt-2 truncate">Rhyme King</div>
+                    <span class="text-[9px] bg-green-100 text-green-700 font-extrabold px-1.5 py-0.5 rounded uppercase tracking-wider block mt-1 w-max">FREE</span>
                 </button>
-                <button onclick="selectUserAvatar('👨‍💼 Project Manager')" class="p-3 border border-slate-200 rounded-xl text-left hover:border-blue-500 bg-slate-50 cursor-pointer">
-                    <div class="text-2xl">👨‍💼</div><div class="text-xs font-bold text-slate-800 mt-1">Manager</div><div class="text-[10px] text-green-600 font-bold">FREE</div>
+                <button onclick="selectWizardAvatar('⚡ Cyber Agent')" class="p-3 border border-slate-200 rounded-xl text-left hover:border-blue-500 hover:bg-blue-50/20 transition-all cursor-pointer group">
+                    <div class="text-2xl group-hover:scale-110 transition-transform">⚡</div>
+                    <div class="text-xs font-black text-slate-800 mt-2 truncate">Cyber Agent</div>
+                    <span class="text-[9px] bg-green-100 text-green-700 font-extrabold px-1.5 py-0.5 rounded uppercase tracking-wider block mt-1 w-max">FREE</span>
                 </button>
-                <button onclick="selectUserAvatar('👨‍🔧 Support Specialist')" class="p-3 border border-slate-200 rounded-xl text-left hover:border-blue-500 bg-slate-50 cursor-pointer">
-                    <div class="text-2xl">👨‍🔧</div><div class="text-xs font-bold text-slate-800 mt-1">Support Spec</div><div class="text-[10px] text-green-600 font-bold">FREE</div>
+                <button onclick="selectWizardAvatar('🚀 Studio Lead')" class="p-3 border border-slate-200 rounded-xl text-left hover:border-blue-500 hover:bg-blue-50/20 transition-all cursor-pointer group">
+                    <div class="text-2xl group-hover:scale-110 transition-transform">🚀</div>
+                    <div class="text-xs font-black text-slate-800 mt-2 truncate">Studio Lead</div>
+                    <span class="text-[9px] bg-green-100 text-green-700 font-extrabold px-1.5 py-0.5 rounded uppercase tracking-wider block mt-1 w-max">FREE</span>
                 </button>
-                <button onclick="selectUserAvatar('👨‍🎨 System Architect')" class="p-3 border border-slate-200 rounded-xl text-left hover:border-blue-500 bg-slate-50 cursor-pointer">
-                    <div class="text-2xl">👨‍🎨</div><div class="text-xs font-bold text-slate-800 mt-1">Architect</div><div class="text-[10px] text-green-600 font-bold">FREE</div>
+                <button onclick="selectWizardAvatar('💎 Lyric Architect')" class="p-3 border border-slate-200 rounded-xl text-left hover:border-blue-500 hover:bg-blue-50/20 transition-all cursor-pointer group">
+                    <div class="text-2xl group-hover:scale-110 transition-transform">💎</div>
+                    <div class="text-xs font-black text-slate-800 mt-2 truncate">Lyric Architect</div>
+                    <span class="text-[9px] bg-green-100 text-green-700 font-extrabold px-1.5 py-0.5 rounded uppercase tracking-wider block mt-1 w-max">FREE</span>
                 </button>
 
-                <!-- Locked 5 -->
-                <div class="p-3 border border-dashed border-slate-200 rounded-xl bg-slate-100 opacity-60 relative select-none">
-                    <div class="text-2xl">🤴</div><div class="text-xs font-bold text-slate-400 mt-1">Platinum King</div><div class="text-[10px] text-red-600 font-bold">LOCKED</div>
-                </div>
-                <div class="p-3 border border-dashed border-slate-200 rounded-xl bg-slate-100 opacity-60 relative select-none">
-                    <div class="text-2xl">🥷</div><div class="text-xs font-bold text-slate-400 mt-1">Shadow Elite</div><div class="text-[10px] text-red-600 font-bold">LOCKED</div>
-                </div>
-                <div class="p-3 border border-dashed border-slate-200 rounded-xl bg-slate-100 opacity-60 relative select-none">
-                    <div class="text-2xl">🧑‍🚀</div><div class="text-xs font-bold text-slate-400 mt-1">Deep Beats Pro</div><div class="text-[10px] text-red-600 font-bold">LOCKED</div>
-                </div>
-                <div class="p-3 border border-dashed border-slate-200 rounded-xl bg-slate-100 opacity-60 relative select-none">
-                    <div class="text-2xl">👨‍🎓</div><div class="text-xs font-bold text-slate-400 mt-1">Senior Lab Director</div><div class="text-[10px] text-red-600 font-bold">LOCKED</div>
-                </div>
-                <div class="p-3 border border-dashed border-slate-200 rounded-xl bg-slate-100 opacity-60 relative select-none">
-                    <div class="text-2xl">🏆</div><div class="text-xs font-bold text-slate-400 mt-1">Master Headliner</div><div class="text-[10px] text-red-600 font-bold">LOCKED</div>
-                </div>
+                <!-- ================= 10 FULLY CONTROLLED LOCKED AVATARS ================= -->
+                <button onclick="selectWizardAvatar('👑 Eleven Elite')" class="p-3 border border-slate-200 rounded-xl text-left bg-slate-50 hover:bg-amber-50/50 hover:border-amber-500 transition-all cursor-pointer group relative">
+                    <div class="text-2xl group-hover:rotate-12 transition-transform">👑</div>
+                    <div class="text-xs font-black text-slate-500 mt-2 truncate">Eleven Elite</div>
+                    <span class="text-[9px] bg-amber-100 text-amber-700 font-extrabold px-1.5 py-0.5 rounded uppercase tracking-wider block mt-1 w-max">LOCKED</span>
+                </button>
+                <button onclick="selectWizardAvatar('🪐 Cosmic Track')" class="p-3 border border-slate-200 rounded-xl text-left bg-slate-50 hover:bg-amber-50/50 hover:border-amber-500 transition-all cursor-pointer group relative">
+                    <div class="text-2xl group-hover:rotate-12 transition-transform">🪐</div>
+                    <div class="text-xs font-black text-slate-500 mt-2 truncate">Cosmic Track</div>
+                    <span class="text-[9px] bg-amber-100 text-amber-700 font-extrabold px-1.5 py-0.5 rounded uppercase tracking-wider block mt-1 w-max">LOCKED</span>
+                </button>
+                <button onclick="selectWizardAvatar('✨ Aura Special')" class="p-3 border border-slate-200 rounded-xl text-left bg-slate-50 hover:bg-amber-50/50 hover:border-amber-500 transition-all cursor-pointer group relative">
+                    <div class="text-2xl group-hover:rotate-12 transition-transform">✨</div>
+                    <div class="text-xs font-black text-slate-500 mt-2 truncate">Aura Special</div>
+                    <span class="text-[9px] bg-amber-100 text-amber-700 font-extrabold px-1.5 py-0.5 rounded uppercase tracking-wider block mt-1 w-max">LOCKED</span>
+                </button>
+                <button onclick="selectWizardAvatar('🔮 Synth Mage')" class="p-3 border border-slate-200 rounded-xl text-left bg-slate-50 hover:bg-amber-50/50 hover:border-amber-500 transition-all cursor-pointer group relative">
+                    <div class="text-2xl group-hover:rotate-12 transition-transform">🔮</div>
+                    <div class="text-xs font-black text-slate-500 mt-2 truncate">Synth Mage</div>
+                    <span class="text-[9px] bg-amber-100 text-amber-700 font-extrabold px-1.5 py-0.5 rounded uppercase tracking-wider block mt-1 w-max">LOCKED</span>
+                </button>
+                <button onclick="selectWizardAvatar('🦁 Pack Director')" class="p-3 border border-slate-200 rounded-xl text-left bg-slate-50 hover:bg-amber-50/50 hover:border-amber-500 transition-all cursor-pointer group relative">
+                    <div class="text-2xl group-hover:rotate-12 transition-transform">🦁</div>
+                    <div class="text-xs font-black text-slate-500 mt-2 truncate">Pack Director</div>
+                    <span class="text-[9px] bg-amber-100 text-amber-700 font-extrabold px-1.5 py-0.5 rounded uppercase tracking-wider block mt-1 w-max">LOCKED</span>
+                </button>
+                <button onclick="selectWizardAvatar('🧬 Cyber Matrix')" class="p-3 border border-slate-200 rounded-xl text-left bg-slate-50 hover:bg-amber-50/50 hover:border-amber-500 transition-all cursor-pointer group relative">
+                    <div class="text-2xl group-hover:rotate-12 transition-transform">🧬</div>
+                    <div class="text-xs font-black text-slate-500 mt-2 truncate">Cyber Matrix</div>
+                    <span class="text-[9px] bg-amber-100 text-amber-700 font-extrabold px-1.5 py-0.5 rounded uppercase tracking-wider block mt-1 w-max">LOCKED</span>
+                </button>
+                <button onclick="selectWizardAvatar('🏆 Grand Champion')" class="p-3 border border-slate-200 rounded-xl text-left bg-slate-50 hover:bg-amber-50/50 hover:border-amber-500 transition-all cursor-pointer group relative">
+                    <div class="text-2xl group-hover:rotate-12 transition-transform">🏆</div>
+                    <div class="text-xs font-black text-slate-500 mt-2 truncate">Grand Champion</div>
+                    <span class="text-[9px] bg-amber-100 text-amber-700 font-extrabold px-1.5 py-0.5 rounded uppercase tracking-wider block mt-1 w-max">LOCKED</span>
+                </button>
+                <button onclick="selectWizardAvatar('🎖️ Major Sound')" class="p-3 border border-slate-200 rounded-xl text-left bg-slate-50 hover:bg-amber-50/50 hover:border-amber-500 transition-all cursor-pointer group relative">
+                    <div class="text-2xl group-hover:rotate-12 transition-transform">🎖️</div>
+                    <div class="text-xs font-black text-slate-500 mt-2 truncate">Major Sound</div>
+                    <span class="text-[9px] bg-amber-100 text-amber-700 font-extrabold px-1.5 py-0.5 rounded uppercase tracking-wider block mt-1 w-max">LOCKED</span>
+                </button>
+                <button onclick="selectWizardAvatar('🎭 Flow Phantom')" class="p-3 border border-slate-200 rounded-xl text-left bg-slate-50 hover:bg-amber-50/50 hover:border-amber-500 transition-all cursor-pointer group relative">
+                    <div class="text-2xl group-hover:rotate-12 transition-transform">🎭</div>
+                    <div class="text-xs font-black text-slate-500 mt-2 truncate">Flow Phantom</div>
+                    <span class="text-[9px] bg-amber-100 text-amber-700 font-extrabold px-1.5 py-0.5 rounded uppercase tracking-wider block mt-1 w-max">LOCKED</span>
+                </button>
+                <button onclick="selectWizardAvatar('💰 Platinum Core')" class="p-3 border border-slate-200 rounded-xl text-left bg-slate-50 hover:bg-amber-50/50 hover:border-amber-500 transition-all cursor-pointer group relative">
+                    <div class="text-2xl group-hover:rotate-12 transition-transform">💰</div>
+                    <div class="text-xs font-black text-slate-500 mt-2 truncate">Platinum Core</div>
+                    <span class="text-[9px] bg-amber-100 text-amber-700 font-extrabold px-1.5 py-0.5 rounded uppercase tracking-wider block mt-1 w-max">LOCKED</span>
+                </button>
             </div>
         </div>
 
-        <!-- Step 4: Upgrade Upsell Screen -->
-        <div id="modal-step-4" class="hidden w-full max-w-md bg-white border border-slate-200 rounded-3xl p-8 shadow-2xl text-center">
-            <div class="text-5xl mb-4">⭐</div>
-            <h4 class="text-2xl font-black text-slate-900">Unlock Master Class Tiers</h4>
-            <p class="text-sm text-slate-500 mt-2">Unlock remaining locked nodes, premium soundboards, and exclusive track releases instantly.</p>
+        <!-- STEP 4: SUBSCRIPTION OPTIONS UPSELL -->
+        <div id="wizard-step-4" class="hidden w-full max-w-md bg-white border border-slate-200 rounded-3xl p-8 shadow-2xl text-center">
+            <div class="w-14 h-14 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center text-2xl mx-auto mb-4 font-black">⭐</div>
+            <h4 class="text-2xl font-black text-slate-900 uppercase tracking-tight">Update Subscription</h4>
+            <p class="text-sm text-slate-500 mt-1">Acquire unlimited tracks pipeline and studio expansion licenses.</p>
             
             <div class="mt-6 flex flex-col gap-3">
-                <button onclick="completeAuthenticationFlow(true)" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 rounded-xl transition-all cursor-pointer">
+                <button onclick="routeToAgeMatrix(true)" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 rounded-xl shadow-md transition-all cursor-pointer">
                     Upgrade Account Now
                 </button>
-                <button onclick="completeAuthenticationFlow(false)" class="w-full bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold py-3 rounded-xl transition-all cursor-pointer">
+                <button onclick="routeToAgeMatrix(false)" class="w-full bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold py-3 rounded-xl transition-all cursor-pointer">
                     Not Now
                 </button>
             </div>
+        </div>
+
+        <!-- STEP 5: AGE TRACKING INPUT MATRIX (DD/MM/YY) -->
+        <div id="wizard-step-5" class="hidden w-full max-w-md bg-white border border-slate-200 rounded-3xl p-6 md:p-8 shadow-2xl">
+            <h4 class="text-2xl font-black text-slate-900 uppercase tracking-tight">What is your Age?</h4>
+            <p class="text-sm text-slate-500 mt-1">Provide date structural details for matrix initialization verification.</p>
+            
+            <div class="mt-6 grid grid-cols-3 gap-3">
+                <div>
+                    <label class="block text-[10px] font-bold text-slate-400 uppercase mb-1">Day (DD)</label>
+                    <input type="text" id="age-dd" maxlength="2" placeholder="16" oninput="autoShiftFocus(this, 'age-mm')" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-3 text-center text-slate-900 font-mono font-bold focus:outline-none focus:border-blue-600 text-lg">
+                </div>
+                <div>
+                    <label class="block text-[10px] font-bold text-slate-400 uppercase mb-1">Month (MM)</label>
+                    <input type="text" id="age-mm" maxlength="2" placeholder="06" oninput="autoShiftFocus(this, 'age-yy')" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-3 text-center text-slate-900 font-mono font-bold focus:outline-none focus:border-blue-600 text-lg">
+                </div>
+                <div>
+                    <label class="block text-[10px] font-bold text-slate-400 uppercase mb-1">Year (YY)</label>
+                    <input type="text" id="age-yy" maxlength="2" placeholder="26" oninput="validateAgeInputFields()" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-3 text-center text-slate-900 font-mono font-bold focus:outline-none focus:border-blue-600 text-lg">
+                </div>
+            </div>
+            <p id="age-error" class="hidden text-xs font-semibold text-red-600 mt-2">Data arrays incomplete. Please provide real structural coordinates.</p>
+            
+            <button onclick="routeToGenderMatrix()" class="w-full mt-6 bg-slate-900 hover:bg-black text-white font-bold py-3.5 rounded-xl transition-all cursor-pointer">
+                Continue Configuration
+            </button>
+        </div>
+
+        <!-- STEP 6: DYNAMIC GENDER TRACKING SELECTOR -->
+        <div id="wizard-step-6" class="hidden w-full max-w-md bg-white border border-slate-200 rounded-3xl p-6 md:p-8 shadow-2xl">
+            <h4 class="text-2xl font-black text-slate-900 uppercase tracking-tight">Select Identity Gender</h4>
+            <p class="text-sm text-slate-500 mt-1">Specify profile architecture parameter states below.</p>
+            
+            <div class="mt-6 space-y-3">
+                <button onclick="setProfileGender('Male')" id="gender-male" class="w-full text-left p-4 border border-slate-200 rounded-xl font-bold text-slate-800 bg-slate-50 hover:border-blue-500 transition-all cursor-pointer flex justify-between items-center">
+                    <span>Male Node</span> <span class="text-lg">👨</span>
+                </button>
+                <button onclick="setProfileGender('Female')" id="gender-female" class="w-full text-left p-4 border border-slate-200 rounded-xl font-bold text-slate-800 bg-slate-50 hover:border-blue-500 transition-all cursor-pointer flex justify-between items-center">
+                    <span>Female Node</span> <span class="text-lg">👩</span>
+                </button>
+                <div class="border border-slate-200 rounded-xl p-3 bg-slate-50 transition-all focus-within:border-blue-500">
+                    <label class="block text-[10px] font-black uppercase text-slate-400 mb-1">Customize Identity Gender</label>
+                    <input type="text" id="gender-custom" placeholder="Specify custom parameters..." oninput="setProfileGender('Custom')" class="w-full bg-transparent border-none text-sm font-bold text-slate-800 focus:outline-none p-0">
+                </div>
+            </div>
+            
+            <button onclick="routeToObjectiveMatrix()" class="w-full mt-6 bg-slate-900 hover:bg-black text-white font-bold py-3.5 rounded-xl transition-all cursor-pointer">
+                Continue Setup
+            </button>
+        </div>
+
+        <!-- STEP 7: OPTIONAL USAGE ENGINE QUESTIONS -->
+        <div id="wizard-step-7" class="hidden w-full max-w-md bg-white border border-slate-200 rounded-3xl p-6 md:p-8 shadow-2xl">
+            <h4 class="text-2xl font-black text-slate-900 uppercase tracking-tight">Why you use?</h4>
+            <p class="text-sm text-slate-500 mt-1">Optional parameter query for service optimization telemetry logs.</p>
+            
+            <div class="mt-6">
+                <textarea id="usage-objective" rows="3" placeholder="e.g. Building application interfaces, listening to premium mix tracks, etc." class="w-full bg-slate-50 border border-slate-200 rounded-xl p-4 text-slate-900 font-medium text-sm focus:outline-none focus:border-blue-600 resize-none"></textarea>
+            </div>
+            
+            <button onclick="finalizeSign-InDeployment()" class="w-full mt-6 bg-blue-600 hover:bg-blue-700 text-white font-bold py-3.5 rounded-xl shadow-lg transition-all cursor-pointer uppercase tracking-wider text-sm">
+                Complete Cloud Compilation
+            </button>
         </div>
 
     </div>
 
     <!-- ================= JAVASCRIPT LOGIC CONTROLS ENGINE ================= -->
     <script>
-        // Global State Tree variables
-        let selectedAvatarData = "👨‍💼 Dev Malik";
+        // System Core State Trees
+        let chosenAvatarIdentity = "🧔 Malik Khan";
+        let chosenSubTier = "STANDARD NODE";
+        let chosenGenderVal = "Not Specified";
         let isDarkMode = false;
 
         // Settings Dropdown Controller
@@ -455,86 +572,149 @@
             document.getElementById('settings-menu').classList.add('hidden');
         }
 
-        // Authentication Modal Access Rules
-        function openSignInModal() {
+        // Wizard Structural Navigation Methods
+        function openSignInWizard() {
             document.getElementById('signin-modal').classList.remove('hidden');
-            document.getElementById('modal-step-1').classList.remove('hidden');
-            document.getElementById('modal-step-2').classList.add('hidden');
-            document.getElementById('modal-step-3').classList.add('hidden');
-            document.getElementById('modal-step-4').classList.add('hidden');
+            hideAllWizardPanels();
+            document.getElementById('wizard-step-1').classList.remove('hidden');
         }
 
-        function closeSignInModal() {
+        function closeSignInWizard() {
             document.getElementById('signin-modal').classList.add('hidden');
         }
 
-        // Step 1: Input Scanner Validation Rule Handler
-        function processGmailValidation() {
-            const emailInput = document.getElementById('user-email').value;
+        function hideAllWizardPanels() {
+            for (let i = 1; i <= 7; i++) {
+                document.getElementById(`wizard-step-${i}`).classList.add('hidden');
+            }
+        }
+
+        // Stage 1 -> Stage 2: 5-7 Seconds Live Scanner Logic
+        function triggerGmailScanner() {
+            const emailValue = document.getElementById('user-email').value;
             const errorLabel = document.getElementById('email-error');
             
-            // Strictly check if input strings terminate exactly in user target arrays
-            if (emailInput.toLowerCase().endsWith('@gmail.com') && emailInput.length > 10) {
+            if (emailValue.toLowerCase().endsWith('@gmail.com') && emailValue.length > 10) {
                 errorLabel.classList.add('hidden');
-                executeScannerSimulation();
+                document.getElementById('wizard-step-1').classList.add('hidden');
+                document.getElementById('wizard-step-2').classList.remove('hidden');
+                
+                // Fast Engine Loop Calculation (Takes exactly 5 to 7 seconds)
+                const processingSeconds = Math.floor(Math.random() * 3) + 5; 
+                let exactCycleCounter = 0;
+                const timerLog = document.getElementById('live-countdown-timer');
+                
+                timerLog.innerText = `Connecting security lines... [0/${processingSeconds}s]`;
+                
+                const backgroundScanner = setInterval(() => {
+                    exactCycleCounter++;
+                    timerLog.innerText = `Verifying digital identities... [${exactCycleCounter}/${processingSeconds}s]`;
+                    
+                    if (exactCycleCounter >= processingSeconds) {
+                        clearInterval(backgroundScanner);
+                        // Jump fast to avatar distribution panel
+                        document.getElementById('wizard-step-2').classList.add('hidden');
+                        document.getElementById('wizard-step-3').classList.remove('hidden');
+                    }
+                }, 1000);
+                
             } else {
                 errorLabel.classList.remove('hidden');
             }
         }
 
-        // Step 2: Scanner Simulation Variable Sequence Loop
-        function executeScannerSimulation() {
-            document.getElementById('modal-step-1').classList.add('hidden');
-            document.getElementById('modal-step-2').classList.remove('hidden');
+        // Stage 3 -> Stage 4: Extraction & Subscription Route
+        function selectWizardAvatar(avatarString) {
+            chosenAvatarIdentity = avatarString;
+            document.getElementById('wizard-step-3').classList.add('hidden');
+            document.getElementById('wizard-step-4').classList.remove('hidden');
+        }
+
+        // Stage 4 -> Stage 5: Premium State Tracking & Age Entry
+        function routeToAgeMatrix(isPremium) {
+            chosenSubTier = isPremium ? "PRO LAB ACCOUNT" : "STANDARD NODE";
+            document.getElementById('wizard-step-4').classList.add('hidden');
+            document.getElementById('wizard-step-5').classList.remove('hidden');
+        }
+
+        // Fast Auto-shift Inputs Focus Logic Tracker
+        function autoShiftFocus(currentField, targetFieldId) {
+            if (currentField.value.length >= currentField.maxLength) {
+                document.getElementById(targetFieldId).focus();
+            }
+            validateAgeInputFields();
+        }
+
+        function validateAgeInputFields() {
+            const dd = document.getElementById('age-dd').value;
+            const mm = document.getElementById('age-mm').value;
+            const yy = document.getElementById('age-yy').value;
             
-            const timerContainer = document.getElementById('scanner-timer');
-            // Calculate randomized timing between user spec 2 to 5 standard seconds
-            const simulatedSeconds = Math.floor(Math.random() * 4) + 2; 
-            let currentCycle = 0;
-
-            const trackingInterval = setInterval(() => {
-                currentCycle++;
-                timerContainer.innerText = `Parsing digital nodes... Cycle [${currentCycle}/${simulatedSeconds}s] executed.`;
-                
-                if (currentCycle >= simulatedSeconds) {
-                    clearInterval(trackingInterval);
-                    // route user directly to profile matrix assignment zone
-                    document.getElementById('modal-step-2').classList.add('hidden');
-                    document.getElementById('modal-step-3').classList.remove('hidden');
-                }
-            }, 1000);
+            if (dd.length === 2 && mm.length === 2 && yy.length === 2) {
+                document.getElementById('age-error').classList.add('hidden');
+                return true;
+            }
+            return false;
         }
 
-        // Step 3: Bio Array Input Extraction
-        function selectUserAvatar(avatarBioString) {
-            selectedAvatarData = avatarBioString;
-            // Transition directly into product configuration upsell panel
-            document.getElementById('modal-step-3').classList.add('hidden');
-            document.getElementById('modal-step-4').classList.remove('hidden');
+        // Stage 5 -> Stage 6: Gender Allocation Matrix Routing
+        function routeToGenderMatrix() {
+            if (validateAgeInputFields()) {
+                document.getElementById('wizard-step-5').classList.add('hidden');
+                document.getElementById('wizard-step-6').classList.remove('hidden');
+            } else {
+                document.getElementById('age-error').classList.remove('hidden');
+            }
         }
 
-        // Step 4: Execution Completion and Element Replacement Routing
-        function completeAuthenticationFlow(upgraded) {
+        // Gender Choice State Manager
+        function setProfileGender(genderType) {
+            // Reset state UI selections
+            document.getElementById('gender-male').classList.remove('border-blue-600', 'bg-blue-50/30');
+            document.getElementById('gender-female').classList.remove('border-blue-600', 'bg-blue-50/30');
+            
+            if (genderType === 'Male') {
+                chosenGenderVal = "Male";
+                document.getElementById('gender-male').classList.add('border-blue-600', 'bg-blue-50/30');
+            } else if (genderType === 'Female') {
+                chosenGenderVal = "Female";
+                document.getElementById('gender-female').classList.add('border-blue-600', 'bg-blue-50/30');
+            } else {
+                chosenGenderVal = document.getElementById('gender-custom').value || "Custom";
+            }
+        }
+
+        // Stage 6 -> Stage 7: Strategy Question Routing
+        function routeToObjectiveMatrix() {
+            document.getElementById('wizard-step-6').classList.add('hidden');
+            document.getElementById('wizard-step-7').classList.remove('hidden');
+        }
+
+        // Final Element Extraction, Replacement and Core Deployment Closure
+        function finalizeSign-InDeployment() {
             const authContainer = document.getElementById('auth-zone');
+            const iconSymbol = chosenAvatarIdentity.split(' ')[0];
+            const cleanNameLabel = chosenAvatarIdentity.split(' ').slice(1).join(' ');
             
-            // Build real component replacement code blocks
+            // Rebuild structural layout blocks cleanly, removing input triggers
             authContainer.innerHTML = `
-                <div class="flex items-center gap-3 bg-slate-100 border border-slate-200 px-4 py-1.5 rounded-2xl dark:bg-slate-800 dark:border-slate-700">
-                    <span class="text-base">${selectedAvatarData.split(' ')[0]}</span>
+                <div class="flex items-center gap-3 bg-slate-50 border border-slate-200 px-4 py-1.5 rounded-2xl dark:bg-slate-800 dark:border-slate-700 shadow-sm">
+                    <span class="text-xl">${iconSymbol}</span>
                     <div class="text-left">
-                        <p class="text-xs font-black text-slate-900 dark:text-white leading-none">${selectedAvatarData.split(' ').slice(1).join(' ')}</p>
-                        <p class="text-[9px] font-bold ${upgraded ? 'text-amber-500' : 'text-slate-400'} tracking-wider uppercase mt-0.5">${upgraded ? 'PRO LAB ACCOUNT' : 'STANDARD NODE'}</p>
+                        <p class="text-xs font-black text-slate-900 dark:text-white leading-none">${cleanNameLabel}</p>
+                        <p class="text-[9px] font-black ${chosenSubTier === 'PRO LAB ACCOUNT' ? 'text-amber-500' : 'text-slate-400'} tracking-wider uppercase mt-1">${chosenSubTier}</p>
                     </div>
                 </div>
             `;
-            closeSignInModal();
+            
+            closeSignInWizard();
         }
 
-        // Logout Processing Logic
+        // Clear Identity Configurations on Request
         function triggerLogout() {
             const authContainer = document.getElementById('auth-zone');
             authContainer.innerHTML = `
-                <button onclick="openSignInModal()" class="bg-blue-600 hover:bg-blue-700 text-white text-sm font-bold px-6 py-2.5 rounded-xl shadow-sm transition-all duration-200 transform active:scale-95 cursor-pointer">
+                <button onclick="openSignInWizard()" class="bg-blue-600 hover:bg-blue-700 text-white text-sm font-bold px-6 py-2.5 rounded-xl shadow-sm transition-all duration-200 transform active:scale-95 cursor-pointer">
                     Sign In
                 </button>
             `;
@@ -553,46 +733,31 @@
                     <title>Privacy Policy & Terms - Eleven Pro Raps</title>
                     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"><\/script>
                     <style>
-                        .hover-glow-card { transition: all 0.4s ease; }
-                        .hover-glow-card:hover { transform: rotate(-3deg) translateY(-4px); box-shadow: 0 20px 40px rgba(37, 99, 235, 0.30); border-color: rgba(37, 99, 235, 0.5); }
-                        .hover-glow-warning { transition: all 0.4s ease; }
-                        .hover-glow-warning:hover { transform: rotate(-3deg) translateY(-4px); box-shadow: 0 20px 40px rgba(220, 38, 38, 0.30); border-color: rgba(220, 38, 38, 0.5); }
+                        .hover-glow-card { transition: all 0.3s ease; }
+                        .hover-glow-card:hover { transform: translateY(-2px); box-shadow: 0 12px 30px rgba(37, 99, 235, 0.30); border-color: rgba(37, 99, 235, 0.4); }
+                        .hover-glow-warning { transition: all 0.3s ease; }
+                        .hover-glow-warning:hover { transform: translateY(-2px); box-shadow: 0 12px 30px rgba(220, 38, 38, 0.30); border-color: rgba(220, 38, 38, 0.4); }
                     <\/style>
                 </head>
                 <body class="bg-white text-slate-900 font-sans antialiased p-6 md:p-12 max-w-4xl mx-auto space-y-8">
                     <header class="border-b border-slate-200 pb-6">
-                        <h1 class="text-4xl font-black text-slate-900">Privacy Policy & Terms of Service</h1>
+                        <h1 class="text-4xl font-black text-slate-900 uppercase">Privacy Policy & Terms of Service</h1>
                         <p class="text-sm text-slate-500 mt-2">Effective Date: June 16, 2026 • Jurisdiction: Punjab, Pakistan</p>
                     </header>
                     <main class="space-y-6">
-                        <p class="text-slate-600">Welcome to <strong>Eleven Pro Raps</strong>. Your privacy and the security of our digital assets are of paramount importance to us. This document governs your access to and use of our platform, including all music, media, lyrics, and code provided by <strong>Nafay Develop and Labs</strong>.</p>
+                        <p class="text-slate-600">Welcome to <strong>Eleven Pro Raps</strong>. Your privacy and digital assets security are important to us. This document governs your access to all modules provided by <strong>Nafay Develops Labs</strong>.</p>
                         
                         <div class="hover-glow-card bg-slate-50 border border-slate-200 p-6 rounded-xl">
                             <h3 class="text-xl font-bold mb-2">1. Information Collection and Use</h3>
-                            <p class="text-slate-600">We respect your privacy. Eleven Pro Raps only collects basic information necessary to enhance your user experience, such as analytics data for track plays and user-submitted forms. We do not sell, trade, or rent your personal information to third parties.</p>
+                            <p class="text-slate-600">We respect user privacy configurations. Analytics track loops and system entry inputs are processed strictly to personalize running session dashboard variables.</p>
                         </div>
 
-                        <div class="hover-glow-card bg-slate-50 border border-slate-200 p-6 rounded-xl">
-                            <h3 class="text-xl font-bold mb-2">2. Intellectual Property Rights</h3>
-                            <p class="text-slate-600">All content features on this website, including but not limited to rap tracks, audio streams, lyrics, branding, and custom web components, are the exclusive intellectual property of <strong>Nafay Develop and Labs</strong> and artist <strong>Malik Nafay</strong>. Unauthorized redistribution, sampling, or commercial exploitation of the audio or code without explicit written consent is strictly prohibited.</p>
-                        </div>
-
-                        <div class="hover-glow-warning bg-slate-50 border-2 border-red-200 p-6 rounded-xl relative overflow-hidden">
-                            <h3 class="text-xl font-bold text-red-600 mb-2">3. Strict Cyber Security & Anti-Hacking Policy</h3>
-                            <p class="text-slate-700 font-bold mb-3">⚠️ Security Warning & Financial Penalties</p>
-                            <p class="text-slate-600 mb-2">Any individual, group, or entity that attempts to compromise, hack, deface, reverse-engineer, inject malicious scripts, or launch Denial of Service (DoS/DDoS) attacks against Eleven Pro Raps or the servers of Nafay Develop and Labs shall be held legally and financially liable.</p>
-                            <div class="bg-white p-3 border-l-4 border-red-600 font-mono text-sm font-bold text-slate-900 my-2">Financial Fine: Contractual assessment fine of $9,999 USD payable in equivalent Pakistani Rupees.</div>
-                            <p class="text-xs text-slate-500">All digital actions are governed by regional laws of Punjab, Pakistan. Violators will be aggressively prosecuted under the Prevention of Electronic Crimes Act (PECA) and reported directly to the Federal Investigation Agency (FIA) Cyber Crime Wing.</p>
-                        </div>
-
-                        <div class="hover-glow-card bg-slate-50 border border-slate-200 p-6 rounded-xl">
-                            <h3 class="text-xl font-bold mb-2">4. Limitation of Liability</h3>
-                            <p class="text-slate-600">Nafay Develop and Labs provides this platform on an "as-is" basis. While we strive to maintain uninterrupted access to our music and web features, we are not liable for any temporary server downtimes or technical interruptions.</p>
-                        </div>
-
-                        <div class="hover-glow-card bg-slate-50 border border-slate-200 p-6 rounded-xl">
-                            <h3 class="text-xl font-bold mb-2">5. Contact Information</h3>
-                            <p class="text-slate-600">For legal inquiries, licensing permissions, or privacy concerns regarding the music of Malik Nafay, please contact us directly through the official dashboard of Nafay Develop and Labs.</p>
+                        <div class="hover-glow-warning bg-slate-50 border-2 border-red-200 p-6 rounded-xl">
+                            <h3 class="text-xl font-bold text-red-600 mb-2">2. Strict Cyber Anti-Hacking Sanctions</h3>
+                            <p class="text-slate-700 font-bold mb-1">⚠️ Security Threat Penalties Matrix</p>
+                            <p class="text-slate-600 mb-2">Any unauthorized intent to exploit, injection scanning, or code manipulation targets running on Eleven Pro Raps systems will trigger structural financial penalty tracking vectors.</p>
+                            <div class="bg-white p-3 border-l-4 border-red-600 font-mono text-sm font-bold text-slate-900 my-2">Contractual Penalties Assessment: $9,999 USD.</div>
+                            <p class="text-xs text-slate-400">All events are monitored securely under terms authorized within the Prevention of Electronic Crimes Act (PECA) guidelines of Punjab, Pakistan.</p>
                         </div>
                     </main>
                 </body>
